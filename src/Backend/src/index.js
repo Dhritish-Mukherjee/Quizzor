@@ -6,6 +6,7 @@ const cors = require('cors');
 const connectDB = require('./config/database');
 const authRouter = require('./routes/authRoutes');
 const redisClient = require('./config/redis');
+const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
 
@@ -29,6 +30,8 @@ app.use('/api/auth', authRouter);
 app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'OK', message: 'Server is running' });
 });
+
+app.use(errorHandler);
 
 app.use((req, res) => {
   res.status(404).json({ success: false, message: 'Route not found' });

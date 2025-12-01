@@ -52,8 +52,10 @@ const signup = async (req, res, next) => {
     });
 
     sendTokenResponse(user, 201, res);
+    
   } catch (error) {
-
+    console.log("hello")
+    next(error)
   }
 };
 
