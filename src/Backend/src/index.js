@@ -4,11 +4,14 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const connectDB = require('./config/database');
+const authRouter = require('./routes/authRoutes');
+const redisClient = require('./config/redis');
 
 const app = express();
 
 // database Connections
 connectDB()
+redisClient.connect()
 
 // middlewares
 app.use(express.json());
@@ -18,6 +21,10 @@ app.use(cors({
   origin: process.env.CLIENT_URL || 'http://localhost:3000',
   credentials: true
 }));
+
+// routes
+app.use('/api/auth', authRouter);
+
 
 app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'OK', message: 'Server is running' });
