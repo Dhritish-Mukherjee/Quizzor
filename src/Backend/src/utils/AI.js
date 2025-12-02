@@ -1,49 +1,50 @@
 const { GoogleGenAI } = require('@google/genai');
 
 const generateQuiz = async (pdfContent, numberOfQuestions) => {
-    const genAI = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY || 'AIzaSyAmNBA-M7a9eDgNnF3RNrRVMhnCxKIJL7U' });
+
+    const genAI = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY || 'AIzaSyAvvI8CfmGeXB8acx13yNKd7j3xEhmalK8' });
 
     try {
         const systemInstruction = `You are a quiz generator. You will be provided with content extracted from a PDF document. Your task is to generate quiz questions based on this content.
 
-PDF Content:
-"""
-${pdfContent}
-"""
+        PDF Content:
+        """
+        ${pdfContent}
+        """
 
-Use the above content as the basis for all quiz questions.`;
+        Use the above content as the basis for all quiz questions.`;
 
         const prompt = `Generate exactly ${numberOfQuestions} quiz questions based on the PDF content provided in the system instruction.
 
-Each question must have:
-- question: the question text
-- options: object with 4 possible answers (A, B, C, D)
-- correctAnswer: the letter of the correct option (A, B, C, or D)
-- explanation: brief explanation of the correct answer
+        Each question must have:
+        - question: the question text
+        - options: object with 4 possible answers (A, B, C, D)
+        - correctAnswer: the letter of the correct option (A, B, C, or D)
+        - explanation: brief explanation of the correct answer
 
-Return ONLY a valid JSON object with this exact structure (no markdown, no code blocks, no additional text):
+        Return ONLY a valid JSON object with this exact structure (no markdown, no code blocks, no additional text):
 
-{
-  "topic": "Content from PDF",
-  "numberOfQuestions": ${numberOfQuestions},
-  "questions": [
-    {
-      "id": 1,
-      "question": "Question text here?",
-      "options": {
-        "A": "First option",
-        "B": "Second option",
-        "C": "Third option",
-        "D": "Fourth option"
-      },
-      "correctAnswer": "A",
-      "explanation": "Explanation here"
-    }
-  ]
-}`;
+        {
+        "topic": "Content from PDF",
+        "numberOfQuestions": ${numberOfQuestions},
+        "questions": [
+            {
+            "id": 1,
+            "question": "Question text here?",
+            "options": {
+                "A": "First option",
+                "B": "Second option",
+                "C": "Third option",
+                "D": "Fourth option"
+            },
+            "correctAnswer": "A",
+            "explanation": "Explanation here"
+            }
+        ]
+        }`;
 
         const result = await genAI.models.generateContent({
-            model: "gemini-2.0-flash-exp",
+            model: "gemini-2.0-flash",
             contents: [{ role: 'user', parts: [{ text: prompt }] }],
             config: {
                 systemInstruction: systemInstruction
@@ -52,12 +53,12 @@ Return ONLY a valid JSON object with this exact structure (no markdown, no code 
 
         let responseText = result.text.trim();
         
-        // Clean up markdown code blocks if present
+
         responseText = responseText.replace(/```json\n?/g, '');
         responseText = responseText.replace(/```\n?/g, '');
         responseText = responseText.trim();
         
-        // Parse and return JSON
+
         const quizData = JSON.parse(responseText);
         return quizData;
 

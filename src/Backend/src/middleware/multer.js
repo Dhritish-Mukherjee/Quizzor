@@ -5,7 +5,7 @@ const pdf = require('pdf-parse');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, './public/uploads'));
+    cb(null, path.join(__dirname, '../../public/uploads'));
   },
   filename: (req, file, cb) => {
     cb(null, file.originalname);
@@ -20,7 +20,7 @@ async function extractPDFText(filePath) {
   return data.text;
 }
 
-// Middleware function
+
 async function pdfUploadMiddleware(req, res, next) {
   try {
     const fileUrl = `/uploads/${req.file.filename}`;
@@ -28,10 +28,9 @@ async function pdfUploadMiddleware(req, res, next) {
 
     const extractedText = await extractPDFText(filePath);
 
-    // Delete file after extraction
+
     fs.unlinkSync(filePath);
 
-    // Attach extracted data to req object for next middleware/route handler
     req.pdfData = {
       extractedText,
       fileInfo: req.file,

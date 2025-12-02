@@ -277,7 +277,6 @@ const getSubmission = async (req, res, next) => {
 
 const createQuizFromPDF = async (req, res) => {
     try {
-        // Check if PDF data exists
         if (!req.pdfData || !req.pdfData.extractedText) {
             return res.status(400).json({
                 success: false,
@@ -285,21 +284,19 @@ const createQuizFromPDF = async (req, res) => {
             });
         }
 
-        // Get number of questions from request (default to 5 if not provided)
+       
         const numberOfQuestions = parseInt(req.body.numberOfQuestions) || parseInt(req.query.numberOfQuestions) || 5;
 
-        // Validate number of questions
-        if (numberOfQuestions < 1 || numberOfQuestions > 50) {
+
+        if (numberOfQuestions < 1 || numberOfQuestions > 30) {
             return res.status(400).json({
                 success: false,
-                error: 'Number of questions must be between 1 and 50.'
+                error: 'Number of questions must be between 1 and 30.'
             });
         }
 
-        // Extract text from PDF data
         const extractedText = req.pdfData.extractedText;
 
-        // Check if extracted text has sufficient content
         if (extractedText.length < 100) {
             return res.status(400).json({
                 success: false,
@@ -307,10 +304,9 @@ const createQuizFromPDF = async (req, res) => {
             });
         }
 
-        // Generate quiz using the extracted text
         const quizData = await generateQuiz(extractedText, numberOfQuestions);
 
-        // Send successful response with quiz data
+
         return res.status(200).json({
             success: true,
             data: quizData,

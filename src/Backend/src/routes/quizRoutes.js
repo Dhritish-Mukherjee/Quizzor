@@ -7,7 +7,7 @@ const {
   submitQuiz,
   getQuizHistory,
   getSubmission,
-  getAIQuiz,
+  createQuizFromPDF,
 } = require('../controllers/quizController');
 const auth = require('../middleware/auth');
 
@@ -16,6 +16,6 @@ router.get('/history', auth, getQuizHistory);
 router.get('/submission/:id', auth, getSubmission);
 router.get('/:id', auth, getQuiz);
 router.post('/:id/submit', auth, submitQuiz);
-router.post('/ai/upload', upload.single('file'), pdfUploadMiddleware, getAIQuiz)
+router.post('/ai/upload', auth, upload.single('file'), pdfUploadMiddleware, createQuizFromPDF)
 
 module.exports = router;

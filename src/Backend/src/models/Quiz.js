@@ -91,7 +91,7 @@ const quizSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Calculate total points before saving
+
 quizSchema.pre('save', function(next) {
   if (this.isModified('questions')) {
     this.totalPoints = this.questions.reduce((sum, q) => sum + q.points, 0);
