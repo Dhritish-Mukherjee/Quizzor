@@ -26,7 +26,7 @@ const About = () => {
 
     
   return (
-    <div className='w-full h-auto bg-white mt-20 text-black flex flex-col gap-5 py-12 px-20 items-center border-b border-gray-400'>
+    <div className='w-full h-auto bg-neutral-100 mt-20 text-black flex flex-col gap-5 py-12 px-20 items-center border-b border-gray-400'>
       <h1 className='text-6xl text-zinc-800 text-center '>The Quizzor AI Platform</h1>
       <p className='text-2xl text-zinc-700 w-1/2 text-center'>Transform knowledge into interactive quizzes for effortless, exciting learning.</p>
 
