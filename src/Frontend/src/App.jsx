@@ -8,7 +8,7 @@ import Dashboard from "./pages/Dashboard";
 
 const App = () => {
   return (
-    <div className="w-full h-screen p-0 m-0 ">
+    <div className="w-full min-h-screen px-4 sm:px-10 md:px-14 lg:px-28 bg-zinc-900 text-white ">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
