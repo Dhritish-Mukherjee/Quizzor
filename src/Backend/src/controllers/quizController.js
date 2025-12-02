@@ -2,7 +2,7 @@ const Quiz = require('../models/Quiz');
 const Submission = require('../models/Submission');
 const User = require('../models/User');
 const { getRedisClient } = require('../config/redis');
-const generateQuiz = require('../utils/AI');
+const {generateQuizFromDocument, generateQuizFromDocumentTurbo} = require('../utils/AI');
 
 // @desc    Get all quizzes
 // @route   GET /api/quiz
@@ -272,39 +272,67 @@ const getSubmission = async (req, res, next) => {
 
 
 // @desc    Post file
-// @route   POST /api/quiz/submission/:id
+// @route   POST /api/quiz/ai/upload/slow
 // @access  Private
 
-const createQuizFromPDF = async (req, res) => {
+const createQuizFromDocumentSlow = async (req, res) => {
     try {
-        if (!req.pdfData || !req.pdfData.extractedText) {
-            return res.status(400).json({
-                success: false,
-                error: 'No PDF data found. Please upload a PDF file.'
-            });
-        }
-
-       
+        
         const numberOfQuestions = parseInt(req.body.numberOfQuestions) || parseInt(req.query.numberOfQuestions) || 5;
 
 
-        if (numberOfQuestions < 1 || numberOfQuestions > 30) {
+        if (numberOfQuestions < 1 || numberOfQuestions > 50) {
             return res.status(400).json({
                 success: false,
-                error: 'Number of questions must be between 1 and 30.'
+                error: 'Number of questions must be between 1 and 50.'
             });
         }
 
-        const extractedText = req.pdfData.extractedText;
+        const fileurl  = req.pdfData.filePath
 
-        if (extractedText.length < 100) {
+        const quizData = await generateQuizFromDocument(fileurl, numberOfQuestions);
+
+
+        return res.status(200).json({
+            success: true,
+            data: quizData,
+            fileInfo: {
+                filename: req.pdfData.fileInfo?.originalname,
+                size: req.pdfData.fileInfo?.size,
+                fileUrl: req.pdfData.fileUrl
+            }
+        });
+
+    } catch (error) {
+        console.error('Controller error:', error);
+        return res.status(500).json({
+            success: false,
+            error: 'Failed to generate quiz from PDF.',
+            message: error.message
+        });
+    }
+};
+
+
+// @desc    Post file
+// @route   POST /api/quiz/ai/upload/turbo
+// @access  Private
+const createQuizFromDocumentTurbo = async (req, res) => {
+    try {
+        
+        const numberOfQuestions = parseInt(req.body.numberOfQuestions) || parseInt(req.query.numberOfQuestions) || 5;
+
+
+        if (numberOfQuestions < 1 || numberOfQuestions > 100) {
             return res.status(400).json({
                 success: false,
-                error: 'PDF content is too short to generate meaningful quiz questions.'
+                error: 'Number of questions must be between 1 and 100.'
             });
         }
 
-        const quizData = await generateQuiz(extractedText, numberOfQuestions);
+        const fileurl  = req.pdfData.filePath
+
+        const quizData = await generateQuizFromDocumentTurbo(fileurl, numberOfQuestions);
 
 
         return res.status(200).json({
@@ -334,5 +362,6 @@ module.exports = {
   submitQuiz,
   getQuizHistory,
   getSubmission,
-  createQuizFromPDF
+  createQuizFromDocumentSlow,
+  createQuizFromDocumentTurbo
 };

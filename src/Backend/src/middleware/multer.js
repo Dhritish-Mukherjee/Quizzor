@@ -1,7 +1,7 @@
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-const pdf = require('pdf-parse');
+
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -14,41 +14,20 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-async function extractPDFText(filePath) {
-  const dataBuffer = fs.readFileSync(filePath);
-  const data = await pdf(dataBuffer);
-  return data.text;
-}
-
 
 async function pdfUploadMiddleware(req, res, next) {
   try {
-    const fileUrl = `/uploads/${req.file.filename}`;
     const filePath = req.file.path;
 
-    const extractedText = await extractPDFText(filePath);
-
-
-    fs.unlinkSync(filePath);
-
     req.pdfData = {
-      extractedText,
       fileInfo: req.file,
-      fileUrl
+      filePath
     };
 
-    next(); // Pass control to next middleware/route handler
+    next(); 
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 }
-
-// Usage example:
-// app.post('/upload', upload.single('file'), pdfUploadMiddleware, (req, res) => {
-//   res.json({
-//     message: "File uploaded successfully!",
-//     ...req.pdfData
-//   });
-// });
 
 module.exports = { upload, pdfUploadMiddleware };
