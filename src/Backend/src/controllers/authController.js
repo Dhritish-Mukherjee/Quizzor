@@ -1,7 +1,8 @@
 const User = require('../models/User');
 const { validateEmail, validatePassword, validateUsername } = require('../utils/validator');
 const { sendTokenResponse, verifyRefreshToken, generateToken } = require('../utils/jwt');
-const { getRedisClient } = require('../config/redis');
+const { redisClient } = require('../config/redis');
+const jwt = require('jsonwebtoken');
 
 // @desc    Register user
 // @route   POST /api/auth/signup
@@ -115,7 +116,9 @@ const logout = async (req, res, next) => {
   try {
     res.cookie('token', 'none', {
       expires: new Date(Date.now() + 10 * 1000),
-      httpOnly: true
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict'
     });
 
     res.status(200).json({
