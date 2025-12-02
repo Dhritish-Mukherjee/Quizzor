@@ -4,7 +4,7 @@ export const AppConetxt = createContext()
 
 const AppContextProvider = (props) => {
 
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(true);
 
     const value = {
         user,setUser
