@@ -8,6 +8,7 @@ const authRouter = require('./routes/authRoutes');
 const redisClient = require('./config/redis');
 const errorHandler = require('./middleware/errorHandler');
 const quizRoutes = require('./routes/quizRoutes');
+const adminRouter = require('./routes/adminRoutes')
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use(cors({
 // routes
 app.use('/api/auth', authRouter);
 app.use('/api/quiz', quizRoutes);
+app.use('/api/admin', adminRouter)
 
 
 app.get('/api/health', (req, res) => {

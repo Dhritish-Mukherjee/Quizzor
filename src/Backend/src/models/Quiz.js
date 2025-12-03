@@ -92,11 +92,10 @@ const quizSchema = new mongoose.Schema({
 });
 
 
-quizSchema.pre('save', function(next) {
+quizSchema.pre('save', function() {
   if (this.isModified('questions')) {
     this.totalPoints = this.questions.reduce((sum, q) => sum + q.points, 0);
   }
-  next();
 });
 
 module.exports = mongoose.model('Quiz', quizSchema);
