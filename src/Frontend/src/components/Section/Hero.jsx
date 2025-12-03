@@ -10,7 +10,7 @@ const Hero = () => {
 
 
   return (
-    <div className='flex flex-col gap-3 sm:gap-7 justify-center items-center  mt-16 sm:mt-20'>
+    <div className='flex flex-col gap-3 sm:gap-7 justify-center items-center  mt-16 sm:mt-20 '>
       <p className='hookline text-xs sm:text-lg text-gray-400'>“Smart quizzes for smart learners.✨” </p>
 
       <h1 className='text-[12vw] sm:text-[6vw] text-center' >Skip the <span className='text-blue-500'>Manual Quiz Creation</span></h1>

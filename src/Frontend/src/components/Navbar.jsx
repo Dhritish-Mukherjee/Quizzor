@@ -10,8 +10,8 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className="flex justify-between py-3 px-4 sm:px-10 border-b border-gray-600 ">
-        <Link to='/' ><div className="logo border border-gray-600 px-3 py-0.5 sm:px-5 sm:py-1 rounded-full flex justify-center items-center ">
+      <nav className="flex justify-between py-3 px-5 sm:px-10 border-b border-gray-600 ">
+        <Link to='/' ><div className="logo border border-gray-600 px-3  py-0.5 sm:px-5 sm:py-1 rounded-full flex justify-center items-center ">
             <h1 className="text-white text-lg sm:text-xl">Quizzor<span className="text-blue-500 text-2xl ">.</span>ai</h1>
         </div>
         </Link>

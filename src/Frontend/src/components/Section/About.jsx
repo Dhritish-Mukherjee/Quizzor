@@ -26,15 +26,15 @@ const About = () => {
 
     
   return (
-    <div className='w-full h-auto bg-neutral-100 mt-20 text-black flex flex-col gap-5 py-12 px-20 items-center border-b border-gray-400'>
-      <h1 className='text-6xl text-zinc-800 text-center '>The Quizzor AI Platform</h1>
-      <p className='text-2xl text-zinc-700 w-1/2 text-center'>Transform knowledge into interactive quizzes for effortless, exciting learning.</p>
+    <div className='w-full h-auto bg-neutral-100 mt-16 sm:mt-20 text-black flex flex-col gap-3 sm:gap-5 py-8 sm:py-12 px-8 sm:px-20 items-center sm:pb-0 border-b border-gray-400'>
+      <h1 className=' text-4xl sm:text-6xl text-zinc-800 text-center '>The Quizzor AI Platform</h1>
+      <p className='text-lg sm:text-2xl text-zinc-700  sm:w-1/2 text-center'>Transform knowledge into interactive quizzes for effortless, exciting learning.</p>
 
-      <div className="features-sec w-full h-auto p-10 flex justify-center items-center">
+      <div className="features-sec  h-auto p-10 flex flex-col sm:flex-row gap-2  justify-center items-center">
         {features.map((item, index) => (
-            <div key={index} className='p-5 flex flex-col gap-2 border-l border-zinc-600 ' >
-                <p className='text-blue-500'>{item.logo}</p>
-                <h3 className='text-2xl text-zinc-800'>{item.title}</h3>
+            <div key={index} className='p-5 w-full flex flex-col gap-2 sm:border-l sm:border-zinc-600  ' >
+                <p className='text-blue-500 w-4'>{item.logo}</p>
+                <h3 className=' text-2xl text-zinc-800'>{item.title}</h3>
                 <p className='text-sm text-zinc-700 '>{item.desc}</p>
             </div>
         ))}
