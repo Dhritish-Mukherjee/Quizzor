@@ -36,7 +36,7 @@ const Quiz = () => {
         {diffCards.map((item, index) => (
             <Link to={item.navigate}><div onClick={() => handleClick(item.navigate)} key={index} className="card p-5 border border-zinc-500  rounded-lg flex flex-col gap-2 hover:scale-105 hover:shadow-gray-500 shadow-gray-500 shadow-md hover:shadow-lg transition-all duration-300  ">
                 <p className=' p-3 bg-zinc-800 w-fit rounded-lg  '>{item.logo}</p>
-                <h3 className='text-lg'>{item.title}</h3>
+                <h3 className='text-lg text-blue-500 '>{item.title}</h3>
                 <p className='text-sm text-zinc-500'>{item.desc}</p>
             </div></Link>
         ))}

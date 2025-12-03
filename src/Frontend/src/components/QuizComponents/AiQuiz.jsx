@@ -3,7 +3,7 @@ import React from 'react'
 const AiQuiz = () => {
   return (
     <div>
-      AI Quiz section 
+      AI Quizes 
     </div>
   )
 }

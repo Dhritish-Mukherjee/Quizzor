@@ -14,6 +14,7 @@ import Quiz from "./pages/Quiz";
 import Quizes from "./components/QuizComponents/Quizes";
 import LiveQuizes from "./components/QuizComponents/LiveQuizes";
 import AiQuiz from "./components/QuizComponents/AiQuiz";
+import SingleQuiz from "./components/QuizComponents/SingleQuiz";
 
 
 const App = () => {
@@ -25,11 +26,12 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />}>
             <Route path="/dashboard/profile" element={<Profile />} />
             <Route path="/dashboard/admin" element={<AdminProfile />} />
-            <Route path="/dashboard/quiz" element={<Quiz />}>
-                  <Route path="/dashboard/quiz/quizes" element={<Quizes />} />
-                  <Route path="/dashboard/quiz/live" element={<LiveQuizes />} />
-                  <Route path="/dashboard/quiz/ai" element={<AiQuiz />} />
-            </Route>
+            <Route path="/dashboard/quiz" element={<Quiz />}/>
+                  
+            <Route path="/dashboard/quiz/quizes" element={<Quizes />} />
+            <Route path="/dashboard/quiz/live" element={<LiveQuizes />} />
+            <Route path="/dashboard/quiz/ai" element={<AiQuiz />} />
+            <Route path="/dashboard/quiz/quizes/:_id" element={<SingleQuiz />} />
             <Route path="/dashboard/analytics" element={<Analytics/>} />
             <Route path="/dashboard/leaderboard" element={<LeaderBoard />} />
         </Route>
