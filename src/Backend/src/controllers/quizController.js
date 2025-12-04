@@ -1,7 +1,7 @@
 const Quiz = require('../models/Quiz');
 const Submission = require('../models/Submission');
 const User = require('../models/User');
-const { getRedisClient } = require('../config/redis');
+const getRedisClient = require('../config/redis');
 const {generateQuizFromDocument, generateQuizFromDocumentTurbo} = require('../utils/AI');
 
 // @desc    Get all quizzes
@@ -44,7 +44,7 @@ const getAllQuizzes = async (req, res, next) => {
 // @access  Private
 const getQuiz = async (req, res, next) => {
   try {
-    const redis = getRedisClient();
+    const redis = getRedisClient;
     const cacheKey = `quiz:${req.params.id}`;
 
     // Try to get from cache
@@ -182,7 +182,7 @@ const submitQuiz = async (req, res, next) => {
     await quiz.save();
 
     // Invalidate cache
-    const redis = getRedisClient();
+    const redis = getRedisClient;
     try {
       await redis.del(`quiz:${quiz._id}`);
       await redis.del(`leaderboard:global`);

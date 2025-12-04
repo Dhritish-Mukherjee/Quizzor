@@ -1,27 +1,64 @@
-Route to SignUp as an User -> @POST api/auth/signup
-Required JSON Body Sample -> 
-```json
-{
-  "username": "Dhritish504",
-  "email": "haha1@gm.com",
-  "password": "xxxx",
-}
+# Authentication Routes Done
 
+## Sign Up
+**Endpoint:** `POST /api/auth/signup`
 
-Route to LogIn as an User -> @POST api/auth/login
-Required JSON Body Sample -> 
+**Description:** Register a new user account
+
+**Request Body:**
 ```json
 {
   "username": "Dhritish504",
   "email": "haha1@gm.com",
   "password": "xxxx"
 }
+```
 
-Route to LogOut as an User -> @POST /api/auth/logout
-No JSON body required, must have cookies(token)
+---
 
-Route to get User Details -> @GET /api/auth/me
-No JSON body required, must have cookies(token)
-Note : This doesn't returns the ObjectIds of the Quizzes the user has take. Use _ for that
+## Log In
+**Endpoint:** `POST /api/auth/login`
 
-Route to Refresh Token -> @POST /api/auth/refresh
+**Description:** Authenticate an existing user
+
+**Request Body:**
+```json
+{
+  "username": "Dhritish504",
+  "email": "haha1@gm.com",
+  "password": "xxxx"
+}
+```
+
+---
+
+## Log Out
+**Endpoint:** `POST /api/auth/logout`
+
+**Description:** Log out the current user
+
+**Authentication:** Required (token via cookies)
+
+**Request Body:** None
+
+---
+
+## Get User Details
+**Endpoint:** `GET /api/auth/me`
+
+**Description:** Retrieve the currently authenticated user's information
+
+**Authentication:** Required (token via cookies)
+
+**Request Body:** None
+
+**Note:** This endpoint does not return the ObjectIds of quizzes the user has taken. Use `_` for that information.
+
+---
+
+## Refresh Token
+**Endpoint:** `POST /api/auth/refresh`
+
+**Description:** Refresh the authentication token
+
+**Request Body:** None

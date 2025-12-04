@@ -1,3 +1,5 @@
+# Admin Routes Documentation Not Done
+
 Route to Create Quiz as an Admin -> /api/admin/quiz
 Required JSON Body Sample -> 
 ```json
