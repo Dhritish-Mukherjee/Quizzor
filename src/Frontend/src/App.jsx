@@ -25,7 +25,17 @@ const App = () => {
   const { showLogin } = useContext(AppConetxt);
   return (
     <div className="w-full min-h-screen  bg-zinc-900 text-white  ">
-     
+     <ToastContainer 
+      position="top-right"
+      autoClose={3000}
+      hideProgressBar={false}
+      newestOnTop={true}
+      closeOnClick
+      pauseOnHover
+      draggable
+      limit={5}
+      />
+
       {showLogin && <Login /> }
       <Routes>
         <Route path="/" element={<Home />} />
@@ -44,15 +54,7 @@ const App = () => {
        
       </Routes>
 
-      <ToastContainer 
-      position="top-right"
-      autoClose={3000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      pauseOnHover
-      draggable
-      />
+      
       
     </div>
   );
