@@ -9,6 +9,7 @@ const redisClient = require('./config/redis');
 const errorHandler = require('./middleware/errorHandler');
 const quizRouter = require('./routes/quizRoutes');
 const adminRouter = require('./routes/adminRoutes')
+const leaderboardRoutes = require('./routes/leaderBoardRoutes');
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use(cors({
 app.use('/api/auth', authRouter);
 app.use('/api/quiz', quizRouter);
 app.use('/api/admin', adminRouter)
+app.use('/api/leaderboard', leaderboardRoutes);
 
 
 app.get('/api/health', (req, res) => {
