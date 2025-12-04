@@ -1,0 +1,36 @@
+.gradient-btn-style {
+    padding: 1em 2em;
+    background-color: #161a20;
+    border:none;
+    color: white;
+    border-radius: 1000px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+
+}
+/*  */
+
+.gradient-btn-style::after {
+    content: '';
+    position: absolute;
+    height: 107%;
+    width: 102%;
+    border-radius: 1000px;
+    background-image: linear-gradient(to bottom right , #008cff, blue);
+    /* z-index: -1; */
+
+}
+
+.gradient-btn-style:hover {
+    z-index: 0;
+    box-shadow: 40px 0 100px #008cff , -40px 0 100px blue;
+}
+
+.btn-blue-style {
+    box-shadow: 40px 0 100px #008cff , -40px 0 100px blue;
+}
+
