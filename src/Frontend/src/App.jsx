@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Quizzor_logo from "./assets/Quizzor_logo.png";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -16,12 +16,17 @@ import LiveQuizes from "./components/QuizComponents/LiveQuizes";
 import AiQuiz from "./components/QuizComponents/AiQuiz";
 import SingleQuiz from "./components/QuizComponents/SingleQuiz";
 import { ToastContainer } from 'react-toastify';
+import Login from "./components/Login";
+import { AppConetxt } from "./context/AppContext";
 
 
 const App = () => {
+
+  const { showLogin } = useContext(AppConetxt);
   return (
     <div className="w-full min-h-screen  bg-zinc-900 text-white  ">
      
+      {showLogin && <Login /> }
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />}>
@@ -38,6 +43,16 @@ const App = () => {
         </Route>
        
       </Routes>
+
+      <ToastContainer 
+      position="top-right"
+      autoClose={3000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      pauseOnHover
+      draggable
+      />
       
     </div>
   );

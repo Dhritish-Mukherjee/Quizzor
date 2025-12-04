@@ -107,7 +107,7 @@ const AiQuiz = () => {
         <hr className="text-zinc-500"/>
 
         <form 
-        onClick={submitHandler}
+        onSubmit={submitHandler}
 
         className="py-3 flex flex-col gap-2">
           <div className="input  flex flex-col gap-1">
