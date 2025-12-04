@@ -86,6 +86,14 @@ const quizSchema = new mongoose.Schema({
   averageScore: {
     type: Number,
     default: 0
+  },
+  imgLink: {
+    type:String,
+    default:''
+  },
+  tags:{
+    type: [String],
+    default: ['Essential']
   }
 }, {
   timestamps: true
