@@ -7,7 +7,8 @@ const connectDB = require('./config/database');
 const authRouter = require('./routes/authRoutes');
 const redisClient = require('./config/redis');
 const errorHandler = require('./middleware/errorHandler');
-const quizRoutes = require('./routes/quizRoutes');
+const quizRouter = require('./routes/quizRoutes');
+const adminRouter = require('./routes/adminRoutes')
 
 const app = express();
 
@@ -19,6 +20,8 @@ redisClient.connect()
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
+
+//cors
 app.use(cors({
   origin: process.env.CLIENT_URL || 'http://localhost:3000',
   credentials: true
@@ -26,7 +29,8 @@ app.use(cors({
 
 // routes
 app.use('/api/auth', authRouter);
-app.use('/api/quiz', quizRoutes);
+app.use('/api/quiz', quizRouter);
+app.use('/api/admin', adminRouter)
 
 
 app.get('/api/health', (req, res) => {
