@@ -51,7 +51,7 @@ const SingleQuiz = () => {
     <div className="flex flex-col gap-5 justify-center items-center">
         <h3 className="text-3xl text-center bg-blue-500/30 border border-blue-500  w-fit px-5 py-1 rounded-full ">Your Quiz🥳</h3>
         {loading ? <div>Quiz loading...</div> : (
-          <Quiz singleQuizdata={singleQuiz} />
+          <Quiz data={singleQuiz} />
         )}
     </div>
   </div>;
