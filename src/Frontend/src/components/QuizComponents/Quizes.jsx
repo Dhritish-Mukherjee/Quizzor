@@ -10,6 +10,8 @@ const Quizes = () => {
 
   const navigate = useNavigate();
 
+  const [loading, setLoading] = useState(false);
+
   const [quizes, setQuizes] = useState([
     {
       title : "Sample Quiz",
@@ -27,20 +29,24 @@ const Quizes = () => {
 
   // useEffect(() => {
   //   const fetchAllQuizes = async () => {
+  //       setLoading(true);
   //     try {
   //       const res = await api.get("/dashboard/quiz/quizes");
 
   //       console.log(res.data)
   //       setQuizes(res.data.quizes);
+  //           setLoading(false);
   //       toast.success("Quizes loaded successfully", {
   //         position: "top-right",
   //       });
   //     } catch (error) {
   //       console.log(error);
 
-  //       toast.error(error?.response?.data?.message || "Failed to load quizes", {
+  //       toast.error(error.message , {
   //         position: "top-right",
   //       });
+  //     }finally {
+  //        setLoading(false);
   //     }
   //   };
 
@@ -55,17 +61,17 @@ const Quizes = () => {
         All Previous Quizes <FaArrowRightLong />
       </h3>
 
+      {loading ? <div>Loading...</div> : 
       <div className="quizes-display flex gap-3 py-3 ">
-        {quizes.length == 0 ? <p className="text-zinc-500">No quizes found</p> : (
+        {quizes.length === 0 ? <p className="text-zinc-500">No quizes found</p> : (
           quizes.map((item, index) => (
             <QuizCard  key={item._id  || item._quizid || index} item={item}  />
 
           ) )
         )}
-
-
-
       </div>
+      }
+
     </div>
   );
 };

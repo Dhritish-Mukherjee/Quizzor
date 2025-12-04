@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import api from "../../api/axios.js";
 import { useNavigate, useParams } from "react-router-dom";
 import Quiz from "./Quiz/Quiz.jsx";
-import { FaArrowLeft } from "react-icons/fa6";
+import { FaArrowLeft, FaS } from "react-icons/fa6";
 
 const SingleQuiz = () => {
 
     const navigate = useNavigate();
+
+    const [loading , setLoading] = useState(false);
 
   const [singleQuiz, setSingleQuiz] = useState({
     title: "Sample Single Quiz",
@@ -19,6 +21,7 @@ const SingleQuiz = () => {
 
   useEffect(() => {
     const getSingleQuiz = async () => {
+      setLoading(true);
       try {
         const res = await api.get(`/dashboard/quizes/quiz/${params._id}`);
 
@@ -30,11 +33,16 @@ const SingleQuiz = () => {
       } catch (error) {
         console.log(error);
 
-        toast.error(error?.response?.data?.message || "Failed to load quizes", {
+        toast.error(error.message || "Failed to load quizes", {
           position: "top-right",
         });
+      }finally {
+        setLoading(false);
       }
     };
+
+    getSingleQuiz();
+
   }, []);
 
   return <div className=" flex flex-col gap-5 ">
@@ -42,7 +50,9 @@ const SingleQuiz = () => {
     
     <div className="flex flex-col gap-5 justify-center items-center">
         <h3 className="text-3xl text-center bg-blue-500/30 border border-blue-500  w-fit px-5 py-1 rounded-full ">Your Quiz🥳</h3>
-        <Quiz />
+        {loading ? <div>Quiz loading...</div> : (
+          <Quiz singleQuizdata={singleQuiz} />
+        )}
     </div>
   </div>;
 };

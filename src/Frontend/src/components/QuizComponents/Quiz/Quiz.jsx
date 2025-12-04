@@ -3,7 +3,7 @@ import "./Quiz.css";
 import { data } from "../../../assets/data.js";
 
 
-const Quiz = () => {
+const Quiz = ({ singleQuizdata }) => {
   let [index, setIndex] = useState(0);
   let [question, setQuestion] = useState(data[0]);
   let [lock, setLock] = useState(false);

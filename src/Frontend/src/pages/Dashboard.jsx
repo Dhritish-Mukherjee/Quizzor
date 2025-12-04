@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, Outlet, Route, Routes } from "react-router-dom";
 
 const Dashboard = () => {
+
+  const [menu, setMenu] = useState("");
+
   return (
     <div className="w-full h-auto ">
 
@@ -18,12 +21,12 @@ const Dashboard = () => {
       </div>
 
       <div className="lower-part flex gap-5 ">
-        <div className="sidebar w-1/6 h-screen bg-transparent border-r border-gray-600 p-5 hidden sm:flex flex-col gap-3 ">
-            <Link to='/dashboard/profile' ><li className="list-none px-5 py-2 bg-zinc-800 text-zinc-400 rounded-lg ">Profile</li></Link>
-            <Link to='/dashboard/admin'><li className="list-none px-5 py-2 bg-zinc-800 text-zinc-400 rounded-lg">Admin</li></Link>
-            <Link to='/dashboard/quiz'><li className="list-none px-5 py-2 bg-zinc-800 text-zinc-400 rounded-lg">Quiz</li></Link>
-            <Link to='/dashboard/analytics'><li className="list-none px-5 py-2 bg-zinc-800 text-zinc-400 rounded-lg">Analytics</li></Link>
-            <Link to='/dashboard/leaderboard'><li className="list-none px-5 py-2 bg-zinc-800 text-zinc-400 rounded-lg ">Leaderboard</li></Link>
+        <div className="sidebar w-1/6 min-h-screen h-auto bg-transparent border-r border-gray-600 p-5 hidden sm:flex flex-col gap-3 ">
+            <Link to='/dashboard/profile' ><li onClick={() => setMenu("profile")} className={`list-none px-5 py-2 bg-zinc-800 text-zinc-400 rounded-lg ${menu === 'profile' ? 'border-l-2 border-blue-500' : ''} `}>Profile</li></Link>
+            <Link to='/dashboard/admin'><li onClick={() => setMenu("admin")} className={`list-none px-5 py-2 bg-zinc-800 text-zinc-400 rounded-lg ${menu === 'admin' ? 'border-l-2 border-blue-500' : ''}`}>Admin</li></Link>
+            <Link to='/dashboard/quiz'><li onClick={() => setMenu("quiz")} className={`list-none px-5 py-2 bg-zinc-800 text-zinc-400 rounded-lg ${menu === 'quiz' ? 'border-l-2 border-blue-500' : ''}`}>Quiz</li></Link>
+            <Link to='/dashboard/analytics'><li onClick={() => setMenu("analytics")} className={`list-none px-5 py-2 bg-zinc-800 text-zinc-400 rounded-lg ${menu === 'analytics' ? 'border-l-2 border-blue-500' : ''}`}>Analytics</li></Link>
+            <Link to='/dashboard/leaderboard'><li onClick={() => setMenu("leaderboard")} className={`list-none px-5 py-2 bg-zinc-800 text-zinc-400 rounded-lg ${menu === 'leaderboard' ? 'border-l-2 border-blue-500' : ''} `}>Leaderboard</li></Link>
         </div>
 
         <div className="main-content w-full p-5 border border-gray-600 m-2 rounded-lg relative z-2">

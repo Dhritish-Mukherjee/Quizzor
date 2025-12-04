@@ -15,6 +15,7 @@ import Quizes from "./components/QuizComponents/Quizes";
 import LiveQuizes from "./components/QuizComponents/LiveQuizes";
 import AiQuiz from "./components/QuizComponents/AiQuiz";
 import SingleQuiz from "./components/QuizComponents/SingleQuiz";
+import { ToastContainer } from 'react-toastify';
 
 
 const App = () => {
