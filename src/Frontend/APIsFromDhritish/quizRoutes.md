@@ -145,24 +145,32 @@
 **Response:**
 ```json
 {
-  "success": true,
-  "data": {
-    "_id": "quiz_id",
-    "title": "Quiz Title",
-    "category": "Category",
-    "difficulty": "medium",
-    "questions": [
-      {
-        "_id": "question_id",
-        "question": "Question text?",
-        "options": ["Option 1", "Option 2", "Option 3", "Option 4"],
-        "points": 10
-      }
-    ],
-    "createdBy": {
-      "username": "creator_name"
+    "success": true,
+    "data": {
+        "_id": "692ffaeae7fe31e72040c532",
+        "title": "Digital Electronics",
+        "description": "Test your knowledge of digital electronics including logic gates, Boolean algebra, number systems, combinational and sequential circuits, flip-flops, counters, and digital design concepts",
+        "category": "ECE Essentials",
+        "difficulty": "medium",
+        "duration": 45,
+        "questions": [
+            ],
+        "totalPoints": 60,
+        "createdBy": {
+            "_id": "692ff273a9249d52134a73a0",
+            "username": "Dhritish504"
+        },
+        "isActive": true,
+        "attemptCount": 4,
+        "averageScore": 5,
+        "createdAt": "2025-12-03T08:55:06.051Z",
+        "updatedAt": "2025-12-04T13:01:17.217Z",
+        "__v": 0,
+        "imgLink": "https://framerusercontent.com/images/E7Mo5NTDmR1lbbwgXpnnLTW9svw.jpg?width=1000&height=750",
+        "tags": [
+            "Essentials"
+        ]
     }
-  }
 }
 ```
 
