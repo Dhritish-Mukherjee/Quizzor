@@ -12,6 +12,49 @@ const Quizes = () => {
 
   const [loading, setLoading] = useState(false);
 
+  const [allQuizes, setAllQuizes] = useState([
+    {
+      _id : "692ff38de7fe31e72040c4ae",
+      title:"Indian Polity",
+      description:"A comprehensive quiz covering fundamental concepts of Indian Constitut…",
+      category:"General Knowledge",
+      difficulty:"medium",
+      duration:20,
+
+      questions:Array (30),
+      totalPoints:60,
+      createdBy:"692ff273a9249d52134a73a0",
+      isActive:true,
+      attemptCount:5,
+      averageScore:0,
+      createdAt:"2025-12-03T08:23:41.488+00:00",
+      updatedAt:"2025-12-03T08:23:41.488+00:00",
+      __v:0,
+      imgLink:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4RGI6CPwUvuOhpuNCKhyZtYliR7CqZhr2dw&s"
+    },
+    {
+      _id : "692ff38de7fe31e72040c4ae",
+      title:"Indian Polity",
+      description:"A comprehensive quiz covering fundamental concepts of Indian Constitut…",
+      category:"General Knowledge",
+      difficulty:"easy",
+      duration:20,
+
+      questions:Array (30),
+      totalPoints:60,
+      createdBy:"692ff273a9249d52134a73a0",
+      isActive:true,
+      attemptCount:0,
+      averageScore:0,
+      createdAt:"2025-12-03T08:23:41.488+00:00",
+      updatedAt:"2025-12-03T08:23:41.488+00:00",
+      __v:0,
+      imgLink:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4RGI6CPwUvuOhpuNCKhyZtYliR7CqZhr2dw&s"
+    },
+  ]);
+
   const [quizes, setQuizes] = useState([
     {
       _id : "692ff38de7fe31e72040c4ae",
@@ -25,7 +68,7 @@ const Quizes = () => {
       totalPoints:60,
       createdBy:"692ff273a9249d52134a73a0",
       isActive:true,
-      attemptCount:0,
+      attemptCount:5,
       averageScore:0,
       createdAt:"2025-12-03T08:23:41.488+00:00",
       updatedAt:"2025-12-03T08:23:41.488+00:00",
@@ -55,6 +98,11 @@ const Quizes = () => {
     },
     
   ]);
+  const [selectedDifficulty, setSelectedDifficulty] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedSort, setSelectedSort] = useState("");
+
+  const [search, setSearch] = useState("");
 
   // useEffect(() => {
   //   const fetchAllQuizes = async () => {
@@ -62,6 +110,7 @@ const Quizes = () => {
   //     try {
   //       const res = await api.get("/quiz");
 
+  //       setAllQuizes(res.data);
   //       setQuizes(res.data); // res.data is an array 
   //       setLoading(false);
   //       toast.success("Quizes loaded successfully", {
@@ -81,6 +130,95 @@ const Quizes = () => {
   //   fetchAllQuizes();
   // }, []);
 
+
+  const handleDifficulty = (value) => {
+    setSelectedDifficulty(value);
+    let filtered = [...allQuizes];
+
+    if(value) {
+     filtered = filtered.filter(q => q.difficulty === value);
+    }
+
+    // if category is also selected 
+    if(selectedCategory) {
+      filtered = filtered.filter(q => q.category === selectedCategory)
+    }
+
+    // if search is also applied 
+    if(search && search.trim() !== '') {
+      const term = search.trim().toLowerCase();
+      filtered = filtered.filter(q => (q.title || '').toLowerCase().includes(term));
+    }
+
+    // if sorting is also selected 
+    if(selectedSort) {
+       filtered = filtered.sort((a,b) => selectedSort === 'ascending' ? a.attemptCount - b.attemptCount : b.attemptCount - a.attemptCount);
+    }
+
+    setQuizes(filtered);
+
+  }
+
+
+
+  const handleCategory = (value) => {
+    setSelectedCategory(value);
+
+    let filtered = [...allQuizes];
+
+    if(value) {
+      filtered = filtered.filter(q => q.category === value);
+    }
+
+    // if difficulty is also selected 
+    if(selectedDifficulty) {
+      filtered = filtered.filter(q => q.difficulty === selectedDifficulty);
+    }
+
+    // if search is also applied 
+    if(search && search.trim() !== '') {
+      const term = search.trim().toLowerCase();
+      filtered = filtered.filter(q => (q.title || '').toLowerCase().includes(term));
+    }
+
+    // if sorting is also selected 
+    if(selectedSort) {
+      filtered = filtered.sort((a,b) => selectedSort === 'ascending' ? a.attemptCount - b.attemptCount : b.attemptCount - a.attemptCount );
+    }
+
+    setQuizes(filtered);
+  }
+
+
+  const handleSort = (value) => {
+    setSelectedSort(value);
+
+    let filtered = [...allQuizes];
+
+    // if difficulty is selected 
+    if(selectedDifficulty) {
+      filtered = filtered.filter(q => q.difficulty === selectedDifficulty);
+    }
+
+    // if category is also selected 
+    if(selectedCategory) {
+      filtered = filtered.filter(q => q.category === selectedCategory);
+    }
+
+    // if search is also applied 
+    if(search && search.trim() !== '') {
+      const term = search.trim().toLowerCase();
+      filtered = filtered.filter(q => (q.title || '').toLowerCase().includes(term));
+    }
+
+    // sorting logic 
+    if(value) {
+      filtered = filtered.sort((a,b) => value === 'ascending' ? a.attemptCount - b.attemptCount : b.attemptCount - a.attemptCount)
+    }
+
+    setQuizes(filtered);
+  }
+
   return (
     <div className="p-0 flex flex-col gap-3 ">
 
@@ -88,13 +226,44 @@ const Quizes = () => {
       
 
       {/* Filter section  */}
-      <div className="filter-section ">
-        <div className="input">
-            <input type="text" placeholder="Search on the topic you want " />
+      <div className="filter-section flex flex-col gap-3 sm:flex sm:flex-row sm:justify-between items-center w-full">
+        <div className="input p-2 w-[300px]">
+
+            <input onChange={(e) => { 
+              setSearch(e.target.value); 
+              handleDifficulty(selectedDifficulty);
+              }}
+              value={search} className="px-3 py-2 outline-0 bg-zinc-800 rounded-full w-full text-sm   placeholder:text-sm " type="text" placeholder="Search on the topic you want . . . " />
+
         </div>
 
-        <div className="filterBtns">
+        <div className="filterBtns flex flex-col  sm:flex sm:flex-row sm:justify-end gap-2  w-full ">
 
+          <select  onChange={(e) => handleDifficulty(e.target.value)} className="bg-zinc-800 p-2 rounded-lg text-sm " name="difficulty" id="" required>
+            <option   value="">difficulty</option>
+            <option  value="easy">easy</option>
+            <option value="medium">medium</option>
+            <option value="hard">hard</option>
+          </select>
+
+
+          <select onChange={(e) => handleCategory(e.target.value)} className="bg-zinc-800 p-2 rounded-lg text-sm " name="category" id="">
+            <option value="">category</option>
+            <option value="General Knowledge">General Knowledge</option>
+            <option value="CSE Essentials">CSE Essentials</option>
+            <option value="ECE Essentials">ECE Essentials</option>
+            <option value="Development Hustles">Development Hustles</option>
+            <option value="Arts and design">Arts and design</option>
+            <option value="Medical">Medical</option>
+            <option value="Miscllaneous">Miscllaneous</option>
+          </select>
+
+
+          <select onChange={(e) => handleSort(e.target.value)} className="bg-zinc-800 p-2 rounded-lg text-sm " name="sort" id="">
+            <option value="">sort</option>
+            <option value="ascending">ascending</option>
+            <option value="descending">descending</option>
+          </select>
         </div>
       </div>
 
