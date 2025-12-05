@@ -5,6 +5,7 @@ import { FiPaperclip } from "react-icons/fi";
 import api from "../../api/axios";
 import { toast } from "react-toastify";
 import Quiz from "./Quiz/Quiz";
+import { SiQuizlet } from "react-icons/si";
 
 const AiQuiz = () => {
 
@@ -88,7 +89,7 @@ const AiQuiz = () => {
 
 
   return (
-    <div className="p-5 flex flex-col gap-5">
+    <div className="p-0 flex flex-col gap-3">
       <p
         className="flex items-center gap-2 px-4 cursor-pointer py-1 bg-zinc-800 w-fit rounded-full "
         onClick={() => navigate("/dashboard/quiz")}
@@ -102,44 +103,43 @@ const AiQuiz = () => {
 
       {aiQuizData ? (<Quiz  data={aiQuizData} />) : (
         <div className="flex justify-center items-center ">
-        <div className="quiz-form p-5 bg-zinc-800 rounded-lg flex flex-col gap-2">
-        <h3 className="text-2xl text-center">Generate Quiz </h3>
+        <div className="quiz-form p-3 bg-zinc-800 rounded-lg flex flex-col gap-2">
+        <h3 className="text-lg text-center flex items-center justify-center gap-2"> <SiQuizlet size={15} /> Generate Quiz </h3>
         <hr className="text-zinc-500"/>
 
         <form 
         onSubmit={submitHandler}
 
-        className="py-3 flex flex-col gap-2">
+        className="py-2 flex flex-col gap-2  sm:w-[300px]">
           <div className="input  flex flex-col gap-1">
-            <label htmlFor="title" className="text-xl">Give a title</label>
-            <input className="px-5 py-2 outline-0 bg-zinc-700 rounded-lg focus:border focus:border-blue-500" name="title" 
+            <label htmlFor="title" className="text-lg">Give a title</label>
+            <input className="px-3 py-1 outline-0 bg-zinc-700 rounded-lg focus:border focus:border-blue-500 placeholder:text-sm" name="title" 
             value={formValues.title}
             onChange={handleChange}
             type="text" placeholder=" e.g. , Programming quiz " required />
           </div>
 
           <div className="input  flex flex-col gap-1">
-            <label htmlFor="topic" className="text-xl">Enter a topic</label>
-            <input className="px-5 py-2 outline-0 bg-zinc-700 rounded-lg focus:border focus:border-blue-500" name="topic"
+            <label htmlFor="topic" className="text-lg">Enter a topic</label>
+            <input className="px-3 py-1 outline-0 bg-zinc-700 rounded-lg focus:border focus:border-blue-500" name="topic"
             value={formValues.topic}
             onChange={handleChange}
              type="text" placeholder=" e.g. , linear algebra, programming " required />
           </div>
 
           <div className="input flex flex-col gap-1">
-            <label htmlFor="noOfQuestions" className="text-xl">Enter no of questions</label>
-            <input className="px-5 py-2 outline-0 bg-zinc-700 rounded-lg focus:border focus:border-blue-500" name="noOfQuestions"
+            <label htmlFor="noOfQuestions" className="text-lg">Enter no of questions</label>
+            <input className="px-3 py-1 outline-0 bg-zinc-700 rounded-lg focus:border focus:border-blue-500" name="noOfQuestions"
             value={formValues.noOfQuestions}
             onChange={handleChange}
             type="number" placeholder=" e.g. , 5 or 10.. " required />
           </div>
           <div className="input flex flex-col gap-1 ">
-            <label htmlFor="difficulty" className="text-xl">Choose difficulty</label>
+            <label htmlFor="difficulty" className="text-lg">Choose difficulty</label>
             <select name="difficulty" id="difficulty"
             value={formValues.difficulty}
             onChange={handleChange}
-            className="border-none focus:border focus:border-blue-500 bg-zinc-700 rounded-lg px-5 py-2 text-zinc-300 cursor-pointer" required>
-              <option value="" className="cursor-pointer">select difficulty</option>
+            className="w-full max-w-full overflow-hidden text-ellipsisborder-none focus:border focus:border-blue-500 bg-zinc-700 rounded-lg px-3 py-1 text-zinc-300 cursor-pointer" required>
               <option value="easy" className="cursor-pointer">easy</option>
               <option value="medium" className="cursor-pointer">medium</option>
               <option value="hard" className="cursor-pointer">hard</option>
@@ -148,16 +148,16 @@ const AiQuiz = () => {
           </div>
 
           <div className="input flex flex-col gap-1">
-            <label htmlFor="file" className="text-xl flex items-center  gap-2">Upload file (optional)<FiPaperclip size={20}/></label>
+            <label htmlFor="file" className="text-lg flex items-center  gap-2">Upload file (optional)<FiPaperclip size={15}/></label>
             <input type="file"
             onChange={handleFileChange}
-            className="text-zinc-300 bg-zinc-700 w-fit rounded-lg px-5 py-2 flex gap-5 cursor-pointer" />
+            className="text-zinc-300 bg-zinc-700 w-[300px] rounded-lg px-3 py-1 flex gap-5 cursor-pointer  text-sm" />
           </div>
 
           <button
           type="submit"
           disabled={loading} 
-          className="px-5 py-2 bg-blue-500 text-lg rounded-lg cursor-pointer hover:scale-102 transition-all duration-300 hover:bg-blue-400 font-semibold">{loading ? "Generating..." : "Generate ✨"}</button>
+          className="px-3 py-1 bg-blue-500 text-md rounded-lg cursor-pointer hover:scale-102 transition-all duration-300 hover:bg-blue-400 font-semibold">{loading ? "Generating..." : "Generate ✨"}</button>
 
         </form>
       </div>

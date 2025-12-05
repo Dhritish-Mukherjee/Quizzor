@@ -18,3 +18,11 @@ bdoy, html {
 .quiz-now {
     box-shadow: 40px 0 100px #008cff , -40px 0 100px blue;
 }
+
+
+.scroll-lock {
+  overflow: hidden;
+  height: 100%;
+  position: fixed;
+  width: 100%;
+}

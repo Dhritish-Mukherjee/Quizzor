@@ -3,7 +3,7 @@ import "./Quiz.css";
 import { data } from "../../../assets/data.js";
 
 
-const Quiz = ({ data }) => {
+const Quiz = () => {
   let [index, setIndex] = useState(0);
   let [question, setQuestion] = useState(data[0]);
   let [lock, setLock] = useState(false);
@@ -58,28 +58,37 @@ const Quiz = ({ data }) => {
     setResult(false);
   }
 
+  // submit quiz functionality 
+  const submitQuiz = () => {
+    alert("Quiz Submitted");
+  }
+
 
   return (
-    <div className="container w-[400px]  p-5 bg-zinc-800 flex flex-col gap-3 rounded-lg ">
-      <h1 className="text-2xl">Quiz Title</h1>
+    <div className="container w-[300px]  p-4 bg-zinc-800 flex flex-col gap-2 rounded-lg ">
+      <h1 className="text-xl">Quiz Title</h1>
       <hr  className="border-none h-[0.5px] bg-[#707070]"/>
       {result ? <></> : <>
-      <h2 className="text-xl">
+      <h2 className="text-lg">
         {index + 1}. {question.question}
       </h2>
       <ul className="flex flex-col gap-2">
-        <li className="text-zinc-600 text-lg flex items-center pl-3 py-2 border border-zinc-500 rounded-lg cursor-pointer" ref={option1} onClick={(e) => checkAns(e, 1)}>{question.option1}</li>
-        <li className="text-zinc-600 text-lg flex items-center pl-3 py-2 border border-zinc-500 rounded-lg cursor-pointer" ref={option2} onClick={(e) => checkAns(e, 2)}>{question.option2}</li>
-        <li className="text-zinc-600 text-lg flex items-center pl-3 py-2 border border-zinc-500 rounded-lg cursor-pointer" ref={option3} onClick={(e) => checkAns(e, 3)}>{question.option3}</li>
-        <li className="text-zinc-600 text-lg flex items-center pl-3 py-2 border border-zinc-500 rounded-lg cursor-pointer" ref={option4} onClick={(e) => checkAns(e, 4)}>{question.option4}</li>
+        <li className="text-zinc-600 text-sm flex items-center pl-3 py-2 border border-zinc-500 rounded-lg cursor-pointer" ref={option1} onClick={(e) => checkAns(e, 1)}>{question.option1}</li>
+        <li className="text-zinc-600 text-sm flex items-center pl-3 py-2 border border-zinc-500 rounded-lg cursor-pointer" ref={option2} onClick={(e) => checkAns(e, 2)}>{question.option2}</li>
+        <li className="text-zinc-600 text-sm flex items-center pl-3 py-2 border border-zinc-500 rounded-lg cursor-pointer" ref={option3} onClick={(e) => checkAns(e, 3)}>{question.option3}</li>
+        <li className="text-zinc-600 text-sm flex items-center pl-3 py-2 border border-zinc-500 rounded-lg cursor-pointer" ref={option4} onClick={(e) => checkAns(e, 4)}>{question.option4}</li>
       </ul>
 
-      <button onClick={next} className="px-8 py-2 bg-blue-500 rounded-lg cursor-pointer font-semibold text-lg hover:scale-102 transition-all duration-300 hover:bg-blue-400">Next</button>
+      <button onClick={next} className="px-8 py-2 bg-blue-500 rounded-lg cursor-pointer font-semibold text-md hover:scale-102 transition-all duration-300 hover:bg-blue-400">Next</button>
 
-      <div className="index text-md text-white text-center">{index + 1} of {data.length} Questions</div></>}
+      <div className="index text-sm text-white text-center">{index + 1} of {data.length} Questions</div></>}
 
         {result ? <><h2>You Scored : {score} of {data.length}</h2>
-      <button onClick={reset} className="px-8 py-2 bg-blue-500 rounded-lg cursor-pointer font-semibold text-lg hover:scale-102 transition-all duration-300 hover:bg-blue-400 ">Reset</button></> : <></>}
+      <button onClick={reset} className="px-8 py-2 bg-blue-500 rounded-lg cursor-pointer font-semibold text-md hover:scale-102 transition-all duration-300 hover:bg-blue-400 ">Reset</button>
+      
+      <button onClick={submitQuiz} className="px-8 py-2 bg-zinc-700 rounded-lg cursor-pointer font-semibold text-md hover:scale-102 transition-all duration-300 hover:bg-zinc-600">Submit quiz</button>
+      
+      </> : <></>}
       
       
     </div>

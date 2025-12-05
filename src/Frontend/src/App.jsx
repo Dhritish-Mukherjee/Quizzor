@@ -18,11 +18,13 @@ import SingleQuiz from "./components/QuizComponents/SingleQuiz";
 import { ToastContainer } from 'react-toastify';
 import Login from "./components/Login";
 import { AppConetxt } from "./context/AppContext";
+import MenuComponent from "./components/MenuComponent";
+
 
 
 const App = () => {
 
-  const { showLogin } = useContext(AppConetxt);
+  const { showLogin, showMenu, setShowMenu } = useContext(AppConetxt);
   return (
     <div className="w-full min-h-screen  bg-zinc-900 text-white  ">
      <ToastContainer 
@@ -47,12 +49,16 @@ const App = () => {
             <Route path="/dashboard/quiz/quizes" element={<Quizes />} />
             <Route path="/dashboard/quiz/live" element={<LiveQuizes />} />
             <Route path="/dashboard/quiz/ai" element={<AiQuiz />} />
+
             <Route path="/dashboard/quiz/quizes/:_id" element={<SingleQuiz />} />
+            
             <Route path="/dashboard/analytics" element={<Analytics/>} />
             <Route path="/dashboard/leaderboard" element={<LeaderBoard />} />
         </Route>
        
       </Routes>
+
+      {showMenu ? <MenuComponent /> : <></>}
 
       
       

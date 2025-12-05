@@ -22,7 +22,7 @@ const Navbar = () => {
         <div className="right-menu flex items-center justify-center gap-5  ">
           {user ? 
             (<>
-            <p  onClick={logout} className="hidden sm:flex items-center justify-center gap-1 text-neutral-400 px-3 py-1 bg-zinc-800 rounded-full cursor-pointer "><FaUserLarge className=" text-zinc-500" />Logout</p>
+            <p  onClick={logout} className="hidden sm:flex items-center justify-center gap-1 text-neutral-400 px-3 py-1 bg-zinc-800 rounded-full cursor-pointer hover:scale-105 transition-all duration-300"><FaUserLarge className=" text-zinc-500 " />Logout</p>
 
             <Link to='/dashboard'><button className="px-5 py-1 bg-transparent rounded-full border border-neutral-100 hover:text-neutral-300  transition-all duration-300 text-neutral-100 cursor-pointer flex justify-center items-center gap-1 text-sm sm:text-md font-medium">Go to Dashboard <IoIosArrowRoundForward /></button></Link>
             

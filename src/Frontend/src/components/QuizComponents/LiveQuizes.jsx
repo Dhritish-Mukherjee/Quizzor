@@ -10,20 +10,7 @@ const LiveQuizes = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  const [liveQuizes, setLiveQuizes] = useState([
-    {
-      title : "Sample Quiz",
-      difficulty : "easy",
-      NoOfQuestions: 10,
-      _id : 1
-    },
-    {
-      title : "Sample Quiz",
-      difficulty : "medium",
-      NoOfQuestions: 10,
-      _id : 2
-    }
-  ]);
+  const [liveQuizes, setLiveQuizes] = useState([]);
 
   // useEffect(() => {
   //   const fetchLiveQuizes = async () => {
@@ -50,7 +37,7 @@ const LiveQuizes = () => {
 
 
   return (
-    <div className="p-5 flex flex-col gap-5 ">
+    <div className="p-0 flex flex-col gap-3 ">
       <p
         className="flex items-center gap-2 px-4 cursor-pointer py-1 bg-zinc-800 w-fit rounded-full "
         onClick={() => navigate("/dashboard/quiz")}
@@ -63,7 +50,7 @@ const LiveQuizes = () => {
 
       {loading ? <div>Loading...</div> : 
       <div className="quizes-display flex gap-3 py-3 ">
-        {liveQuizes.length === 0 ? <p className="text-zinc-500">No quizes found</p> : (
+        {liveQuizes.length === 0 ? <p className="text-zinc-500">No quiz is live now!</p> : (
           liveQuizes.map((item, index) => (
             <QuizCard  key={item._id  || item._quizid || index} item={item}  />
 
