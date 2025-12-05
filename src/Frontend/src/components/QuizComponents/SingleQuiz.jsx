@@ -23,7 +23,7 @@ const SingleQuiz = () => {
     const getSingleQuiz = async () => {
       setLoading(true);
       try {
-        const res = await api.get(`/dashboard/quizes/quiz/${params._id}`);
+        const res = await api.get(`/quiz/${params._id}`);
 
         console.log(res.data);
         setSingleQuiz(res.data);

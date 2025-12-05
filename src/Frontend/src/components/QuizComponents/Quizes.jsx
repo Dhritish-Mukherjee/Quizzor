@@ -14,33 +14,61 @@ const Quizes = () => {
 
   const [quizes, setQuizes] = useState([
     {
-      title : "Sample Quiz",
-      difficulty : "easy",
-      NoOfQuestions: 10,
-      _id : 1
+      _id : "692ff38de7fe31e72040c4ae",
+      title:"Indian Polity",
+      description:"A comprehensive quiz covering fundamental concepts of Indian Constitut…",
+      category:"General Knowledge",
+      difficulty:"medium",
+      duration:20,
+
+      questions:Array (30),
+      totalPoints:60,
+      createdBy:"692ff273a9249d52134a73a0",
+      isActive:true,
+      attemptCount:0,
+      averageScore:0,
+      createdAt:"2025-12-03T08:23:41.488+00:00",
+      updatedAt:"2025-12-03T08:23:41.488+00:00",
+      __v:0,
+      imgLink:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4RGI6CPwUvuOhpuNCKhyZtYliR7CqZhr2dw&s"
     },
     {
-      title : "Sample Quiz",
-      difficulty : "medium",
-      NoOfQuestions: 10,
-      _id : 2
-    }
+      _id : "692ff38de7fe31e72040c4ae",
+      title:"Indian Polity",
+      description:"A comprehensive quiz covering fundamental concepts of Indian Constitut…",
+      category:"General Knowledge",
+      difficulty:"easy",
+      duration:20,
+
+      questions:Array (30),
+      totalPoints:60,
+      createdBy:"692ff273a9249d52134a73a0",
+      isActive:true,
+      attemptCount:0,
+      averageScore:0,
+      createdAt:"2025-12-03T08:23:41.488+00:00",
+      updatedAt:"2025-12-03T08:23:41.488+00:00",
+      __v:0,
+      imgLink:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4RGI6CPwUvuOhpuNCKhyZtYliR7CqZhr2dw&s"
+    },
+    
   ]);
 
   // useEffect(() => {
   //   const fetchAllQuizes = async () => {
   //       setLoading(true);
   //     try {
-  //       const res = await api.get("/dashboard/quiz/quizes");
+  //       const res = await api.get("/quiz");
 
-  //       console.log(res.data)
-  //       setQuizes(res.data.quizes);
-  //           setLoading(false);
+  //       setQuizes(res.data); // res.data is an array 
+  //       setLoading(false);
   //       toast.success("Quizes loaded successfully", {
   //         position: "top-right",
   //       });
+
   //     } catch (error) {
-  //       console.log(error);
 
   //       toast.error(error.message , {
   //         position: "top-right",
@@ -54,16 +82,26 @@ const Quizes = () => {
   // }, []);
 
   return (
-    <div className="p-5 flex flex-col gap-5 ">
+    <div className="p-0 flex flex-col gap-3 ">
 
       <p className="flex items-center gap-2 px-4 cursor-pointer py-1 bg-zinc-800 w-fit rounded-full " onClick={() => navigate('/dashboard/quiz')}><FaArrowLeft size={10} /> Back</p>
-      <h3 className="flex items-center gap-2 text-zinc-400 ">
-        All Previous Quizes <FaArrowRightLong />
-      </h3>
+      
+
+      {/* Filter section  */}
+      <div className="filter-section ">
+        <div className="input">
+            <input type="text" placeholder="Search on the topic you want " />
+        </div>
+
+        <div className="filterBtns">
+
+        </div>
+      </div>
+
 
       {loading ? <div>Loading...</div> : 
-      <div className="quizes-display flex gap-3 py-3 ">
-        {quizes.length === 0 ? <p className="text-zinc-500">No quizes found</p> : (
+      <div className="quizes-display flex flex-col items-center sm:flex sm:flex-row sm:flex-wrap gap-3 py-3 ">
+        {quizes.length === 0 ? <p className="text-zinc-500">No quiz found!</p> : (
           quizes.map((item, index) => (
             <QuizCard  key={item._id  || item._quizid || index} item={item}  />
 

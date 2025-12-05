@@ -13,6 +13,7 @@ const Features = () => {
     const onClickHandler = () => {
         if(user) {
             toast.success("Moving to dashboard")
+            
         }else {
             toast.error("you have to login first")
         }
