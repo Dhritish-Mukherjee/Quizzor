@@ -18,25 +18,107 @@
 **Response:**
 ```json
 {
-  "success": true,
-  "data": [
-    {
-      "_id": "quiz_id_here",
-      "title": "Quiz Title",
-      "category": "Category",
-      "difficulty": "easy",
-      "createdBy": {
-        "username": "creator_name"
-      }
-    }
-  ],
-  "pagination": {
-    "page": 1,
-    "limit": 10,
-    "total": 50,
-    "pages": 5
-  }
+    "success": true,
+    "data": [
+        {
+            "_id": "6932051dc47166529a840183",
+            "title": "Electronic Devices and VLSI",
+            "description": "A comprehensive quiz covering fundamental concepts of semiconductor devices, integrated circuits, VLSI design, fabrication processes, logic gates, and digital electronics.",
+            "category": "ECE Essentials",
+            "difficulty": "easy",
+            "duration": 60,
+            "questions": [
+                {
+                    "questionText": "What is the fan-in of a logic gate?",
+                    "options": [
+                        "Number of outputs",
+                        "Number of inputs",
+                        "Power consumption",
+                        "Propagation delay"
+                    ],
+                    "points": 1,
+                    "_id": "6932051dc47166529a8401c8"
+                },
+                {
+                    "questionText": "The propagation delay in a logic gate is the time:",
+                    "options": [
+                        "To turn on",
+                        "Between input change and output response",
+                        "To cool down",
+                        "To charge capacitor"
+                    ],
+                    "points": 1,
+                    "_id": "6932051dc47166529a8401c9"
+                }
+            ],
+            "totalPoints": 100,
+            "createdBy": {
+                "_id": "6931ff69c47166529a840044",
+                "username": "PureMeowTea"
+            },
+            "isActive": true,
+            "attemptCount": 0,
+            "averageScore": 0,
+            "imgLink": "https://oss.smbom.com/news/fileAnnexes/2023-06-12/8ec4adb5-6d95-456d-8af0-b01f00eb9e01.png?x-oss-process=style/mobile_img",
+            "tags": [
+                "MegaQuiz"
+            ],
+            "createdAt": "2025-12-04T22:03:09.427Z",
+            "updatedAt": "2025-12-04T22:03:09.427Z",
+            "__v": 0
+        },
+        {
+            "_id": "69320237c47166529a840112",
+            "title": "Python Programming",
+            "description": "A challenging mini quiz covering advanced Python concepts including decorators, generators, async IO, metaclasses, memory model, OOP internals, GIL, and language-specific behaviors.",
+            "category": "Development Hustles",
+            "difficulty": "hard",
+            "duration": 30,
+            "questions": [
+                {
+                    "questionText": "What does Python’s garbage collector primarily use to detect unreferenced objects?",
+                    "options": [
+                        "Reference counting + cycle detection",
+                        "Mark and sweep only",
+                        "Tracing GC only",
+                        "Manual memory free"
+                    ],
+                    "points": 3,
+                    "_id": "69320237c47166529a84011e"
+                },
+                {
+                    "questionText": "Which comprehension type creates a generator instead of a list?",
+                    "options": [
+                        "{x for x in range(10)}",
+                        "[x for x in range(10)]",
+                        "(x for x in range(10))",
+                        "tuple(x for x in range(10))"
+                    ],
+                    "points": 3,
+                    "_id": "69320237c47166529a84011f"
+                }
+            ],
+            "totalPoints": 60,
+            "createdBy": {
+                "_id": "6931ff69c47166529a840044",
+                "username": "PureMeowTea"
+            },
+            "isActive": true,
+            "attemptCount": 4,
+            "averageScore": 50,
+            "imgLink": "https://images.unsplash.com/photo-1649180556628-9ba704115795?q=80&w=2062&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "tags": [
+                "MiniQuiz"
+            ],
+            "createdAt": "2025-12-04T21:50:47.276Z",
+            "updatedAt": "2025-12-05T00:04:16.212Z",
+            "__v": 0
+        }
+      ]
 }
+
+
+
 ```
 
 ---
