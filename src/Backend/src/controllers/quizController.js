@@ -174,7 +174,7 @@ const submitQuiz = async (req, res, next) => {
 
     // Update user stats
     const user = await User.findById(req.user.id);
-    await user.updateStats(score, quiz.questions.length, timeTaken);
+    await user.updateStats(correctAnswers, score, quiz.questions.length, timeTaken);
 
     // Update quiz stats
     quiz.attemptCount += 1;

@@ -65,11 +65,11 @@ userSchema.methods.comparePassword = async function(candidatePassword) {
 };
 
 // creating another method to update the stats of the User
-userSchema.methods.updateStats = async function(score, totalQuestions, timeTaken) {
+userSchema.methods.updateStats = async function(correctAnswers, score, totalQuestions, timeTaken) {
   this.totalScore += score;
   this.totalQuizzes += 1;
   
-  const accuracy = (score / totalQuestions) * 100;
+  const accuracy = (correctAnswers / totalQuestions) * 100;
   this.averageAccuracy = ((this.averageAccuracy * (this.totalQuizzes - 1)) + accuracy) / this.totalQuizzes;
   
   await this.save();
