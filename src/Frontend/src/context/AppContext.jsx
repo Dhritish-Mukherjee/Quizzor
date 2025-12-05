@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
+import '../index.css'
 
 
 export const AppConetxt = createContext()
@@ -24,10 +25,21 @@ const AppContextProvider = (props) => {
     }, [location.pathname])
    
     const dashMenuHandler = () => {
-        user ? setShowMenu(!showMenu) : '';
+        if (!user) return;
 
+        const newShowMenu = !showMenu;
+        setShowMenu(newShowMenu);
 
+        
+        if (newShowMenu) {
+            document.body.classList.add('scroll-lock'); // lock scroll
+        } else {
+            document.body.classList.remove('scroll-lock'); // unlock scroll
+        }
+        
     }
+
+    
     
     
 

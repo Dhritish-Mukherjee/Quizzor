@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, Outlet, Route, Routes } from "react-router-dom";
 import { FaRegUserCircle } from "react-icons/fa";
 import { GrUserAdmin } from "react-icons/gr";
@@ -15,7 +15,6 @@ const Dashboard = () => {
   const [menu, setMenu] = useState("");
   const { logout, showMenu, setShowMenu, dashMenuHandler } = useContext(AppConetxt);
 
-  
 
   return (
     <div className="w-full h-auto ">
