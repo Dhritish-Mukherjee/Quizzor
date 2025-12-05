@@ -62,7 +62,6 @@ const getQuiz = async (req, res, next) => {
     }
 
     const quiz = await Quiz.findById(req.params.id)
-      .select('-questions.correctAnswer -questions.explanation')
       .populate('createdBy', 'username');
 
     if (!quiz) {
