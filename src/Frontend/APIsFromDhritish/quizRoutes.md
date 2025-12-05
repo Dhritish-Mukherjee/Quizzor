@@ -114,7 +114,14 @@
             "updatedAt": "2025-12-05T00:04:16.212Z",
             "__v": 0
         }
-      ]
+      ],
+        "pagination": {
+                "page": 1,
+                "limit": 10,
+                "total": 13,
+                "pages": 2
+            }
+
 }
 
 
