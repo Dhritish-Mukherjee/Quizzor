@@ -10,7 +10,7 @@ const AppContextProvider = (props) => {
     const location = useLocation();
 
 
-    const [user, setUser] = useState(true);
+    const [user, setUser] = useState(null);
     const [showLogin, setShowLogin] = useState(false);
      const [showMenu, setShowMenu] = useState(false);
 

@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 import "./Quiz.css";
-import { data } from "../../../assets/data.js";
+// import { data } from "../../../assets/data.js";
 
 
-const Quiz = () => {
+const Quiz = ({data}) => { // data is an array 
   let [index, setIndex] = useState(0);
   let [question, setQuestion] = useState(data[0]);
   let [lock, setLock] = useState(false);
@@ -66,7 +66,7 @@ const Quiz = () => {
 
   return (
     <div className="container w-[300px]  p-4 bg-zinc-800 flex flex-col gap-2 rounded-lg ">
-      <h1 className="text-xl">Quiz Title</h1>
+      <h1 className="text-xl">{data.title}</h1>
       <hr  className="border-none h-[0.5px] bg-[#707070]"/>
       {result ? <></> : <>
       <h2 className="text-lg">
