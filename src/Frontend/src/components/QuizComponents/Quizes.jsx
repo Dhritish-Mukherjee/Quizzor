@@ -27,10 +27,11 @@ const Quizes = () => {
       try {
         const res = await api.get("/quiz");
 
-        console.log(res);
+        console.log(res.data);
+        const arrayData = res.data ?.data || [];
 
-        setAllQuizes(res.data);
-        setQuizes(res.data); // res.data is an array 
+        setAllQuizes(arrayData);
+        setQuizes(arrayData);
         setLoading(false);
         toast.success("Quizes loaded successfully", {
           position: "top-right",
@@ -179,7 +180,7 @@ const Quizes = () => {
 
 
           <select onChange={(e) => handleSort(e.target.value)} className="bg-zinc-800 p-2 rounded-lg text-sm " name="sort" id="">
-            <option value="">sort</option>
+            <option value="">sort on how many people attempted</option>
             <option value="ascending">ascending</option>
             <option value="descending">descending</option>
           </select>
