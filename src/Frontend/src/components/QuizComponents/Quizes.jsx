@@ -12,123 +12,42 @@ const Quizes = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const [allQuizes, setAllQuizes] = useState([
-    {
-      _id : "692ff38de7fe31e72040c4ae",
-      title:"Indian Polity",
-      description:"A comprehensive quiz covering fundamental concepts of Indian Constitut…",
-      category:"General Knowledge",
-      difficulty:"medium",
-      duration:20,
+  const [allQuizes, setAllQuizes] = useState([]);
 
-      questions:Array (30),
-      totalPoints:60,
-      createdBy:"692ff273a9249d52134a73a0",
-      isActive:true,
-      attemptCount:5,
-      averageScore:0,
-      createdAt:"2025-12-03T08:23:41.488+00:00",
-      updatedAt:"2025-12-03T08:23:41.488+00:00",
-      __v:0,
-      imgLink:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4RGI6CPwUvuOhpuNCKhyZtYliR7CqZhr2dw&s"
-    },
-    {
-      _id : "692ff38de7fe31e72040c4ae",
-      title:"Indian Polity",
-      description:"A comprehensive quiz covering fundamental concepts of Indian Constitut…",
-      category:"General Knowledge",
-      difficulty:"easy",
-      duration:20,
-
-      questions:Array (30),
-      totalPoints:60,
-      createdBy:"692ff273a9249d52134a73a0",
-      isActive:true,
-      attemptCount:0,
-      averageScore:0,
-      createdAt:"2025-12-03T08:23:41.488+00:00",
-      updatedAt:"2025-12-03T08:23:41.488+00:00",
-      __v:0,
-      imgLink:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4RGI6CPwUvuOhpuNCKhyZtYliR7CqZhr2dw&s"
-    },
-  ]);
-
-  const [quizes, setQuizes] = useState([
-    {
-      _id : "692ff38de7fe31e72040c4ae",
-      title:"Indian Polity",
-      description:"A comprehensive quiz covering fundamental concepts of Indian Constitut…",
-      category:"General Knowledge",
-      difficulty:"medium",
-      duration:20,
-
-      questions:Array (30),
-      totalPoints:60,
-      createdBy:"692ff273a9249d52134a73a0",
-      isActive:true,
-      attemptCount:5,
-      averageScore:0,
-      createdAt:"2025-12-03T08:23:41.488+00:00",
-      updatedAt:"2025-12-03T08:23:41.488+00:00",
-      __v:0,
-      imgLink:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4RGI6CPwUvuOhpuNCKhyZtYliR7CqZhr2dw&s"
-    },
-    {
-      _id : "692ff38de7fe31e72040c4ae",
-      title:"Indian Polity",
-      description:"A comprehensive quiz covering fundamental concepts of Indian Constitut…",
-      category:"General Knowledge",
-      difficulty:"easy",
-      duration:20,
-
-      questions:Array (30),
-      totalPoints:60,
-      createdBy:"692ff273a9249d52134a73a0",
-      isActive:true,
-      attemptCount:0,
-      averageScore:0,
-      createdAt:"2025-12-03T08:23:41.488+00:00",
-      updatedAt:"2025-12-03T08:23:41.488+00:00",
-      __v:0,
-      imgLink:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4RGI6CPwUvuOhpuNCKhyZtYliR7CqZhr2dw&s"
-    },
-    
-  ]);
+  const [quizes, setQuizes] = useState([]);
   const [selectedDifficulty, setSelectedDifficulty] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedSort, setSelectedSort] = useState("");
 
   const [search, setSearch] = useState("");
 
-  // useEffect(() => {
-  //   const fetchAllQuizes = async () => {
-  //       setLoading(true);
-  //     try {
-  //       const res = await api.get("/quiz");
+  useEffect(() => {
+    const fetchAllQuizes = async () => {
+        setLoading(true);
+      try {
+        const res = await api.get("/quiz");
 
-  //       setAllQuizes(res.data);
-  //       setQuizes(res.data); // res.data is an array 
-  //       setLoading(false);
-  //       toast.success("Quizes loaded successfully", {
-  //         position: "top-right",
-  //       });
+        console.log(res);
 
-  //     } catch (error) {
+        setAllQuizes(res.data);
+        setQuizes(res.data); // res.data is an array 
+        setLoading(false);
+        toast.success("Quizes loaded successfully", {
+          position: "top-right",
+        });
 
-  //       toast.error(error.message , {
-  //         position: "top-right",
-  //       });
-  //     }finally {
-  //        setLoading(false);
-  //     }
-  //   };
+      } catch (error) {
 
-  //   fetchAllQuizes();
-  // }, []);
+        toast.error(error.message , {
+          position: "top-right",
+        });
+      }finally {
+         setLoading(false);
+      }
+    };
+
+    fetchAllQuizes();
+  }, []);
 
 
   const handleDifficulty = (value) => {

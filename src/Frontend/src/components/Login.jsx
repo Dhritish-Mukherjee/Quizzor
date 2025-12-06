@@ -13,7 +13,7 @@ const Login = () => {
     const [state, setState] = useState('Login');
     const { setShowLogin, setToken, setUser } = useContext(AppConetxt);
 
-    const [name, setName] = useState("");
+    const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -36,15 +36,16 @@ const Login = () => {
                 }
 
               }else {
-                const { data } = await api.post('/auth/register', {name, email,password});
+                const { data } = await api.post('/auth/signup', {username, email,password});
 
                 if(data.success) {
                     setToken(data.token);
-                    setUser(data.user);
+                    setUser(data.user.username);
                     localStorage.setItem('token', data.token);
                     setShowLogin(false);
                     toast.success("Registered sucessfully")
                 }else {
+                  console.log(data.message);
                     toast.error(data.message);
                 }
               }
@@ -86,7 +87,7 @@ const Login = () => {
 
         {state !== 'Login' ? <div className="border px-6 py-2 flex items-center gap-2 rounded-full mt-5 ">
             <FaUserLarge />
-            <input onChange={(e) => setName(e.target.value)} value={name} type="text"  placeholder="Full Name" className="outline-0 text-sm " required/>
+            <input onChange={(e) => setUsername(e.target.value)} value={username} type="text"  placeholder="Full username" className="outline-0 text-sm " required/>
         </div> : <></>}
 
         <div className="border px-6 py-2 flex items-center gap-2 rounded-full mt-4 ">
@@ -101,7 +102,7 @@ const Login = () => {
 
         <p className="text-sm text-blue-600 my-4 cursor-pointer">Forgot password?</p>
 
-        <button className="bg-blue-600 w-full text-white py-2 rounded-full">{state === 'Login' ? 'login' : 'create account'}</button>
+        <button className="bg-blue-600 w-full text-white py-2 rounded-full cursor-pointer">{state === 'Login' ? 'login' : 'create account'}</button>
 
         {state ==='Login' ? <p className="mt-5 text-center ">Don't have an account? <span className="text-blue-600 cursor-pointer" onClick={() => setState('Sign Up')}>Sign up</span></p> :
 
