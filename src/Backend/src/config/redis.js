@@ -8,7 +8,7 @@ const redisClient = createClient({
         port: 10527
     }
 });
-console.log("Redis Connected")
-redisClient.on('error', err => console.log('Redis Client Error', err));
+
+redisClient.on('error', err => console.log('Redis Client Error:', err));
 
 module.exports = redisClient;

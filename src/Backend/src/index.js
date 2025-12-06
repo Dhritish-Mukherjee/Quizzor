@@ -14,8 +14,16 @@ const leaderboardRoutes = require('./routes/leaderBoardRoutes');
 const app = express();
 
 // database Connections
-connectDB()
-redisClient.connect()
+connectDB();
+
+(async () => {
+    try {
+        await redisClient.connect();
+        console.log('Redis Connected Successfully');
+    } catch (err) {
+        console.error('Failed to connect to Redis:', err);
+    }
+})();
 
 // middlewares
 app.use(express.json());
@@ -24,7 +32,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 
 //cors
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
+  origin: process.env.CLIENT_URL || 'http://localhost:5173',
   credentials: true
 }));
 
