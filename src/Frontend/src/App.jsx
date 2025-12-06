@@ -19,6 +19,9 @@ import { ToastContainer } from 'react-toastify';
 import Login from "./components/Login";
 import { AppConetxt } from "./context/AppContext";
 import MenuComponent from "./components/MenuComponent";
+import GlobalLeaderboard from "./components/LeaderbaordComponents/GlobalLeaderboard";
+import SpecificRank from "./components/LeaderbaordComponents/SpecificRank";
+import SpecificLeaderboard from "./components/LeaderbaordComponents/SpecificLeaderboard";
 
 
 
@@ -53,7 +56,11 @@ const App = () => {
             <Route path="/dashboard/quiz/quizes/:_id" element={<SingleQuiz />} />
             
             <Route path="/dashboard/analytics" element={<Analytics/>} />
+
             <Route path="/dashboard/leaderboard" element={<LeaderBoard />} />
+            <Route path="/dashboard/leaderboard/global" element={<GlobalLeaderboard />} />
+            <Route path="/dashboard/leaderboard/specific-rank" element={<SpecificRank />} />
+            <Route path="/dashboard/leaderboard/specific-leaderbaord" element={<SpecificLeaderboard />} />
         </Route>
        
       </Routes>

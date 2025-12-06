@@ -12,28 +12,32 @@ const LiveQuizes = () => {
 
   const [liveQuizes, setLiveQuizes] = useState([]);
 
-  // useEffect(() => {
-  //   const fetchLiveQuizes = async () => {
-  //       setLoading(true);
-  //       try {
-  //         const res = await api.get("/dashboard/quiz/live");
-  //         setLiveQuizes(res.data);
-  //         toast.success("Quizes loaded successfully", {
-  //           position: 'top-right'
-  //         });
-  //       } catch (error) {
-  //         toast.error(error.message, {
-  //           position:"top-right"
-  //         })
-  //       }finally {
-  //         setLoading(false);
-  //       }
+  useEffect(() => {
+    const fetchLiveQuizes = async () => {
+        setLoading(true);
+        try {
+          const res = await api.get("/quiz/live"); // live quizes api endpoint 
+          console.log(res);
 
-  //   }
+          const dataArray = res.data ?.data || [];
+          setLiveQuizes(dataArray);
+          toast.success("Quizes loaded successfully", {
+            position: 'top-right'
+          });
+        } catch (error) {
+          console.log(error.message);
+          toast.error("Something went wrong, try later", {
+            position:"top-right"
+          })
+        }finally {
+          setLoading(false);
+        }
 
-  //   fetchLiveQuizes();
+    }
 
-  // }, [])
+    fetchLiveQuizes();
+
+  }, [])
 
 
   return (
