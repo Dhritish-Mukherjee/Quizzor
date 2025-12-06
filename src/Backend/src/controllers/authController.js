@@ -65,6 +65,7 @@ const signup = async (req, res, next) => {
 // @access  Public
 const login = async (req, res, next) => {
   try {
+    console.log("Before Try")
     const { email, password } = req.body;
 
     // Validate input
@@ -95,13 +96,14 @@ const login = async (req, res, next) => {
 
     // Check password
     const isMatch = await user.comparePassword(password);
-
+    console.log("Before Response")
     if (!isMatch) {
       return res.status(401).json({
         success: false,
         message: 'Invalid credentials'
       });
     }
+    console.log("After Response")
 
     sendTokenResponse(user, 200, res);
   } catch (error) {
