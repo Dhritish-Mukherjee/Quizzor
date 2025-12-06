@@ -3,11 +3,11 @@ import "./Quiz.css";
 import api from "../../../api/axios.js";
 import { toast } from "react-toastify";
 
-const Quiz = ({ quiz_id , data }) => {
+const Quiz = ({ data }) => {
   // console.log(data);
 
   let [index, setIndex] = useState(0);
-  let [question, setQuestion] = useState(null);
+  let [question, setQuestion] = useState(null); // FIX 1
   let [lock, setLock] = useState(false);
   let [score, setScore] = useState(0);
   let [result, setResult] = useState(false);
@@ -21,7 +21,7 @@ const Quiz = ({ quiz_id , data }) => {
 
   let option_array = [option1, option2, option3, option4];
 
-
+  // FIX 2 — Update question when data loads
   useEffect(() => {
     if (Array.isArray(data) && data.length > 0) {
       const safeIndex = Math.min(Math.max(0, index), data.length - 1);
@@ -39,7 +39,7 @@ const Quiz = ({ quiz_id , data }) => {
   }, [data, index]);
 
   const checkAns = (e, ans) => {
-    if (!question || lock) return;
+    if (!question || lock) return; // FIX 3
 
     if (question.ans == ans) {
       e.target.classList.add("correct");
@@ -86,7 +86,7 @@ const Quiz = ({ quiz_id , data }) => {
         return 0;
       }
 
-      setIndex((prev) => prev + 1);
+      setIndex((prev) => prev + 1); // FIX 4
       setLock(false);
 
       option_array.forEach((option) => {
@@ -107,27 +107,20 @@ const Quiz = ({ quiz_id , data }) => {
   };
 
   const submitQuiz = async () => {
-    const quizId = quiz_id || null;
-    console.log(quizId)
+    const quizId = data.quizId || data[0]?.quizId || data[0]?._id || data._id || null;
 
 
     const payload = {
-      _id: quizId,
+      quizId: quizId,
       answers: answers,
       timeTaken: Math.floor(Math.random() * 5000),
     };
 
     try {
-      console.log(payload);
-      console.log("axios baseURL =", api?.defaults?.baseURL);
-
       const res = await api.post(`/quiz/${quizId}/submit`, payload);
-      console.log("res : ", res)
-      console.log("res data : ", res.data);
-      
 
       if (res) {
-        toast.success("Quiz submitted sucessfully");
+        toast.error("Quiz submitted sucessfully");
         console.log(res.data);
       } else {
         toast.error("Failed to submit quiz");

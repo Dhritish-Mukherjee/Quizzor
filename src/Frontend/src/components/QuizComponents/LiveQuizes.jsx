@@ -25,7 +25,8 @@ const LiveQuizes = () => {
             position: 'top-right'
           });
         } catch (error) {
-          toast.error(error.message, {
+          console.log(error.message);
+          toast.error("Something went wrong, try later", {
             position:"top-right"
           })
         }finally {

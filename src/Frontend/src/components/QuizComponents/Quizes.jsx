@@ -189,7 +189,7 @@ const Quizes = () => {
 
 
       {loading ? <div>Loading...</div> : 
-      <div className="quizes-display flex flex-col items-center sm:flex sm:flex-row sm:flex-wrap gap-3 py-3 ">
+      <div className="quizes-display flex flex-col items-center sm:flex sm:flex-row sm:items-start sm:flex-wrap gap-3 py-3 ">
         {quizes.length === 0 ? <p className="text-zinc-500">No quiz found!</p> : (
           quizes.map((item, index) => (
             <QuizCard  key={item._id  || item._quizid || index} item={item}  />

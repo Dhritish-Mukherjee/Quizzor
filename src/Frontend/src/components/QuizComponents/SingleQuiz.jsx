@@ -3,6 +3,7 @@ import api from "../../api/axios.js";
 import { useNavigate, useParams } from "react-router-dom";
 import Quiz from "./Quiz/Quiz.jsx";
 import { FaArrowLeft, FaS } from "react-icons/fa6";
+import { toast } from "react-toastify";
 
 const SingleQuiz = () => {
   const navigate = useNavigate();
@@ -26,22 +27,26 @@ const SingleQuiz = () => {
 
 
   const transformBackendQuizData = (res) => {
-    if (!res || !res.data || Array.isArray(res.data.questions)) return [];
+    if (!res || !res.data || !res.data.data || !Array.isArray(res.data.data.questions)) return [];
 
-    const arr = res.data.questions.map((q) => {
-      const ans = getAnswerFromCorrectAnswer(q);
+    
 
-      return {
-        question: q.questionText || q.question || "",
-        option1: (q.options && q.options[0]) || "",
-        option2: (q.options && q.options[1]) || "",
-        option3: (q.options && q.options[2]) || "",
-        option4: (q.options && q.options[3]) || "",
-        ans: ans,
-      };
-    });
+    const arr = res.data.data.questions.map((q) => {
+  const ans = getAnswerFromCorrectAnswer(q);
 
-    arr.title = res.data.title || "Untitled Quiz";
+  return {
+    question: q.questionText || q.question || "",
+    option1: (q.options && q.options[0]) || "",
+    option2: (q.options && q.options[1]) || "",
+    option3: (q.options && q.options[2]) || "",
+    option4: (q.options && q.options[3]) || "",
+    ans: ans,
+    _id: q._id || q.id || null,
+  };
+});
+
+arr.title = res.data.data.title || "Untitled Quiz";
+
 
     return arr;
   };
@@ -53,9 +58,10 @@ const SingleQuiz = () => {
       try {
         const res = await api.get(`/quiz/${params._id}`);
 
-        console.log(res.data); // res.data is an object
+        console.log(res.data);
         
         const finalArrayData = transformBackendQuizData(res);
+        // console.log(finalArrayData)
 
         setSingleQuiz(finalArrayData); // it is an array
 
@@ -63,7 +69,7 @@ const SingleQuiz = () => {
           position: "top-right",
         });
       } catch (error) {
-        console.log(error);
+        // console.log(error);
 
         toast.error(error.message || "Failed to load quizes", {
           position: "top-right",
@@ -92,7 +98,7 @@ const SingleQuiz = () => {
         <h3 className="text-xl text-center bg-blue-500/30 border border-blue-500  w-fit px-5 py-1 rounded-full ">
           Your Quiz🥳
         </h3>
-        {loading ? <div>Quiz loading...</div> : <Quiz data={singleQuiz} />}
+        {loading ? <div>Quiz loading...</div> : <Quiz quiz_id={params._id} data={singleQuiz} />}
       </div>
     </div>
   );
