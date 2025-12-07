@@ -39,9 +39,7 @@ app.use(cors({
 }));
 
 app.use(express.static(path.join(_dirname, 'Frontend/dist')));
-app.get('*', (_, res) => {
-  res.sendFile(path.resolve(_dirname, 'Frontend/dist/index.html'));
-})
+
 // routes
 app.use('/api/auth', authRouter);
 app.use('/api/quiz', quizRouter);
@@ -52,6 +50,10 @@ app.use('/api/leaderboard', leaderboardRoutes);
 app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'OK', message: 'Server is running' });
 });
+
+app.get('*', (_, res) => {
+  res.sendFile(path.resolve(_dirname, 'Frontend/dist/index.html'));
+})
 
 app.use(errorHandler);
 
