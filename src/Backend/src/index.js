@@ -25,7 +25,6 @@ connectDB();
     }
 })();
 
-const __dirname = path.resolve();
 
 // middlewares
 app.use(express.json());
