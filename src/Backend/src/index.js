@@ -37,7 +37,7 @@ app.use(cors({
   credentials: true
 }));
 
-app.use(express.static(path.join(__dirname, 'Frontend/dist')));
+app.use(express.static(path.join(__dirname, '../../Frontend/dist')));
 
 // routes
 app.use('/api/auth', authRouter);
@@ -51,7 +51,7 @@ app.get('/api/health', (req, res) => {
 });
 
 app.get('*', (_, res) => {
-  res.sendFile(path.resolve(__dirname, 'Frontend/dist/index.html'));
+  res.sendFile(path.resolve(__dirname, '../../Frontend/dist/index.html'));
 })
 
 app.use(errorHandler);
