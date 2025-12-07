@@ -9,7 +9,7 @@ const redisClient = require('./config/redis');
 const errorHandler = require('./middleware/errorHandler');
 const quizRouter = require('./routes/quizRoutes');
 const adminRouter = require('./routes/adminRoutes')
-const leaderboardRoutes = require('./routes/leaderBoardRoutes');
+const leaderboardRoutes = require('./routes/leaderboardRoutes');
 const path = require('path');
 const app = express();
 
