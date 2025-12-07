@@ -10,7 +10,7 @@ const errorHandler = require('./middleware/errorHandler');
 const quizRouter = require('./routes/quizRoutes');
 const adminRouter = require('./routes/adminRoutes')
 const leaderboardRoutes = require('./routes/leaderBoardRoutes');
-
+const path = require('path');
 const app = express();
 
 // database Connections
@@ -25,6 +25,8 @@ connectDB();
     }
 })();
 
+const _dirname = path.resolve();
+
 // middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -36,6 +38,10 @@ app.use(cors({
   credentials: true
 }));
 
+app.use(express.static(path.join(_dirname, 'Frontend/dist')));
+app.get('*', (_, res) => {
+  res.sendFile(path.resolve(_dirname, 'Frontend/dist/index.html'));
+})
 // routes
 app.use('/api/auth', authRouter);
 app.use('/api/quiz', quizRouter);
