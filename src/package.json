@@ -1,4 +1,5 @@
 {
+  "type":"commonjs",
   "scripts": {
     "dev": "nodemon ./Backend/src/index.js",
     "start": "node ./Backend/src/index.js",
