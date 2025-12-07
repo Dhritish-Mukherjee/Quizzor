@@ -2,7 +2,7 @@
   "scripts": {
     "dev": "nodemon ./Backend/src/index.js",
     "start": "node ./Backend/src/index.js",
-    "build": "npm install --prefix ./Frontend && npm run build --prefix ./Frontend"
+    "build": "npm install && npm install --prefix ./Frontend && npm run build --prefix ./Frontend"
   },
   "dependencies": {
     "@google/genai": "^1.30.0",
