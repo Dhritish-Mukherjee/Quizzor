@@ -33,7 +33,7 @@ const LeaderBoard = () => {
     const navigatePage = (path) => {
       navigate(path);
     }
-
+ 
   return (
     <div className='p-0 flex flex-col gap-8 '>
       <h2 className=' text-xl sm:text-2xl  flex items-center justify-center gap-2 text-neutral-100 px-5 py-2 rounded-full  bg-yellow-800 border-2 border-yellow-500 font-mono text-center'>👑Leaderboard👑 </h2>
