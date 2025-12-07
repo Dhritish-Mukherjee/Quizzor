@@ -203,7 +203,7 @@ const Quiz = ({ quiz_id , data }) => {
       {result ? (
         <>
           <h2>
-            You Scored : {score} of {data.length}
+            You corrected {score} of {data.length} questions 
           </h2>
           <button
             onClick={reset}
