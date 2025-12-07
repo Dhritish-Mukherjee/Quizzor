@@ -25,7 +25,7 @@ connectDB();
     }
 })();
 
-const _dirname = path.resolve();
+const __dirname = path.resolve();
 
 // middlewares
 app.use(express.json());
@@ -38,7 +38,7 @@ app.use(cors({
   credentials: true
 }));
 
-app.use(express.static(path.join(_dirname, 'Frontend/dist')));
+app.use(express.static(path.join(__dirname, 'frontend/dist')));
 
 // routes
 app.use('/api/auth', authRouter);
@@ -52,7 +52,7 @@ app.get('/api/health', (req, res) => {
 });
 
 app.get('*', (_, res) => {
-  res.sendFile(path.resolve(_dirname, 'Frontend/dist/index.html'));
+  res.sendFile(path.resolve(__dirname, 'frontend/dist/index.html'));
 })
 
 app.use(errorHandler);
