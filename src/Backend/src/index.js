@@ -37,8 +37,6 @@ app.use(cors({
   credentials: true
 }));
 
-app.use(express.static(path.join(__dirname, '../../Frontend/dist')));
-
 // routes
 app.use('/api/auth', authRouter);
 app.use('/api/quiz', quizRouter);
@@ -50,16 +48,17 @@ app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'OK', message: 'Server is running' });
 });
 
+app.use('/api/*', (req, res) => {
+  res.status(404).json({ success: false, message: 'Route not found' });
+});
+
+app.use(express.static(path.join(__dirname, '../../Frontend/dist')));
+
 app.get('*', (_, res) => {
   res.sendFile(path.resolve(__dirname, '../../Frontend/dist/index.html'));
 })
 
 app.use(errorHandler);
-
-app.use((req, res) => {
-  res.status(404).json({ success: false, message: 'Route not found' });
-});
-
 
 // running server
 const PORT = process.env.PORT || 5000;

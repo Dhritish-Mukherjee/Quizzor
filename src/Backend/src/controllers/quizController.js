@@ -2,7 +2,7 @@ const Quiz = require('../models/Quiz');
 const Submission = require('../models/Submission');
 const User = require('../models/User');
 const getRedisClient = require('../config/redis');
-const {generateQuizFromDocument, generateQuizFromDocumentTurbo} = require('../utils/AI');
+const {generateQuizFromDocument, generateQuizFromDocumentTurbo, generateQuizWithoutDocument} = require('../utils/AI');
 
 // @desc    Get all quizzes
 // @route   GET /api/quiz
@@ -287,9 +287,23 @@ const createQuizFromDocumentSlow = async (req, res) => {
             });
         }
 
+        const difficulty = req.body.difficulty || req.query.difficulty;
+        if (!difficulty) {
+            return res.status(400).json({
+                success: false,
+                error: 'Please select a difficulty level.'
+            });
+        }
+        if (difficulty !== 'easy' && difficulty !== 'medium' && difficulty !== 'hard' && difficulty !== 'god level hard') {
+            return res.status(400).json({
+                success: false,
+                error: 'Please select a valid difficulty level.'
+            });
+        }
+
         const fileurl  = req.pdfData.filePath
 
-        const quizData = await generateQuizFromDocument(fileurl, numberOfQuestions);
+        const quizData = await generateQuizFromDocument(fileurl, difficulty, numberOfQuestions);
 
 
         return res.status(200).json({
@@ -329,9 +343,17 @@ const createQuizFromDocumentTurbo = async (req, res) => {
             });
         }
 
+        const difficulty = req.body.difficulty || req.query.difficulty;
+        if (!difficulty) {
+            return res.status(400).json({
+                success: false,
+                error: 'Please select a difficulty level.'
+            });
+        }
+
         const fileurl  = req.pdfData.filePath
 
-        const quizData = await generateQuizFromDocumentTurbo(fileurl, numberOfQuestions);
+        const quizData = await generateQuizFromDocumentTurbo(fileurl, difficulty, numberOfQuestions);
 
 
         return res.status(200).json({
@@ -354,6 +376,38 @@ const createQuizFromDocumentTurbo = async (req, res) => {
     }
 };
 
+createQuizWithoutDocument = async (req, res) => {
+  try{
+      const numberOfQuestions = parseInt(req.body.numberOfQuestions) || 5;
+
+      if (numberOfQuestions < 1 || numberOfQuestions > 50) {
+        return res.status(400).json({
+          success: false,
+          error: 'Number of questions must be between 1 and 50.'
+        });
+      }
+
+      const topic = req.body.topic || req.query.topic;
+      const description = req.body.description || req.query.description;
+      const difficulty = req.body.difficulty || req.query.difficulty;
+
+      const quizData = await generateQuizWithoutDocument(topic, description, difficulty, numberOfQuestions);
+
+        return res.status(200).json({
+            success: true,
+            data: quizData,
+        });
+    }
+    catch (error) {
+        console.error('Controller error:', error);
+        return res.status(500).json({
+            success: false,
+            error: 'Failed to generate quiz from Topic and Description',
+            message: error.message
+        });
+    }
+  
+}
 
 module.exports = {
   getAllQuizzes,
@@ -362,5 +416,6 @@ module.exports = {
   getQuizHistory,
   getSubmission,
   createQuizFromDocumentSlow,
-  createQuizFromDocumentTurbo
+  createQuizFromDocumentTurbo,
+  createQuizWithoutDocument
 };

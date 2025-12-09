@@ -8,7 +8,8 @@ const {
   getQuizHistory,
   getSubmission,
   createQuizFromDocumentTurbo,
-  createQuizFromDocumentSlow
+  createQuizFromDocumentSlow,
+  createQuizWithoutDocument
 } = require('../controllers/quizController');
 const auth = require('../middleware/auth');
 
@@ -19,5 +20,6 @@ router.get('/:id', auth, getQuiz);
 router.post('/:id/submit', auth, submitQuiz);
 router.post('/ai/upload/slow', auth, upload.single('file'), pdfUploadMiddleware, createQuizFromDocumentSlow)
 router.post('/ai/upload/turbo', auth, upload.single('file'), pdfUploadMiddleware, createQuizFromDocumentTurbo)
+router.post('/ai/nofile', auth, createQuizWithoutDocument)
 
 module.exports = router;

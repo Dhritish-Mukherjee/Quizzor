@@ -7,10 +7,10 @@ const mammoth = require('mammoth');
 const officeParser = require('officeparser');
 const XLSX = require('xlsx');
 
-const MAX_TEXT_LENGTH = 70000;
+const MAX_TEXT_LENGTH = 80000;
 
 
-const generateQuizFromDocument = async (filePath, numberOfQuestions) => {
+const generateQuizFromDocument = async (filePath,difficulty, numberOfQuestions) => {
     const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
     const fileManager = new GoogleAIFileManager(process.env.GOOGLE_API_KEY);
 
@@ -53,7 +53,7 @@ const generateQuizFromDocument = async (filePath, numberOfQuestions) => {
 
 
         const prompt = isImage 
-            ? `Analyze this image carefully and generate exactly ${numberOfQuestions} quiz questions based on its content.
+            ? `Analyze this image carefully and generate exactly ${numberOfQuestions} ${difficulty} quiz questions based on its content.
 
         For this image, focus on:
         - Visual elements, diagrams, charts, or graphs shown
@@ -73,6 +73,7 @@ const generateQuizFromDocument = async (filePath, numberOfQuestions) => {
         {
             "topic": "Brief description of the image content",
             "numberOfQuestions": ${numberOfQuestions},
+            "difficulty": "${difficulty}",
             "questions": [
                 {
                     "id": 1,
@@ -88,7 +89,7 @@ const generateQuizFromDocument = async (filePath, numberOfQuestions) => {
                 }
             ]
         }`
-            : `Analyze the content of this document and generate exactly ${numberOfQuestions} quiz questions based on it.
+            : `Analyze the content of this document and generate exactly ${numberOfQuestions} ${difficulty} quiz questions based on it.
 
         Requirements:
         - Focus on the most important concepts and information from the document
@@ -103,6 +104,7 @@ const generateQuizFromDocument = async (filePath, numberOfQuestions) => {
         {
             "topic": "Brief description of the document topic",
             "numberOfQuestions": ${numberOfQuestions},
+            "difficulty": "${difficulty}",
             "questions": [
                 {
                     "id": 1,
@@ -240,7 +242,7 @@ async function extractTextFromFile(filePath) {
     }
 }
 
-const generateQuizFromDocumentTurbo = async (filePath, numberOfQuestions) => {
+const generateQuizFromDocumentTurbo = async (filePath, difficulty, numberOfQuestions) => {
     const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
 
     try {
@@ -264,7 +266,7 @@ const generateQuizFromDocumentTurbo = async (filePath, numberOfQuestions) => {
         console.log(`Extracted ${extractedText.length} characters of text`);
 
 
-        const prompt = `Based on the following document content, generate exactly ${numberOfQuestions} quiz questions.
+        const prompt = `Based on the following document content, generate exactly ${numberOfQuestions} ${difficulty} quiz questions.
 
 Document Content:
 """
@@ -284,6 +286,7 @@ Return ONLY a valid JSON object with this exact structure (no markdown, no code 
 {
     "topic": "Brief description of the document topic",
     "numberOfQuestions": ${numberOfQuestions},
+    "difficulty": "${difficulty}",
     "questions": [
         {
             "id": 1,
@@ -342,10 +345,85 @@ Return ONLY a valid JSON object with this exact structure (no markdown, no code 
     }
 };
 
+const generateQuizWithoutDocument = async (topic, description, difficulty, numberOfQuestions) => {
+    const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
+
+    try {
+        const prompt = `Based on the following topic and description, generate exactly ${numberOfQuestions} ${difficulty} quiz questions.
+
+Topic: ${topic}
+Description: ${description}
+
+Requirements:
+- Focus on the most important concepts and information from the document
+- Make questions clear, specific, and unambiguous
+- Ensure all options are plausible but only one is correct
+- Provide helpful and educational explanations
+- Cover different sections of the document if possible
+- Vary the difficulty level appropriately
+
+Return ONLY a valid JSON object with this exact structure (no markdown, no code blocks, no additional text):
+
+{
+    "topic": "Brief description of the ${topic}",
+    "numberOfQuestions": ${numberOfQuestions},
+    "difficulty": "${difficulty}",
+    "questions": [
+        {
+            "id": 1,
+            "question": "Question text here?",
+            "options": {
+                "A": "First option",
+                "B": "Second option",
+                "C": "Third option",
+                "D": "Fourth option"
+            },
+            "correctAnswer": "A",
+            "explanation": "Explanation here"
+        }
+    ]
+}`;
+        const model = genAI.getGenerativeModel({ 
+            model: "gemini-2.5-flash"
+        });
+        
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        let responseText = response.text().trim();
+        
+        
+        responseText = responseText.replace(/```json\n?/g, '');
+        responseText = responseText.replace(/```\n?/g, '');
+        responseText = responseText.trim();
+        
+        const quizData = JSON.parse(responseText);
+
+        if (!quizData.questions || !Array.isArray(quizData.questions)) {
+            throw new Error('Invalid quiz data structure returned');
+        }
+
+        if (quizData.questions.length !== numberOfQuestions) {
+            console.warn(`Warning: Generated ${quizData.questions.length} questions instead of ${numberOfQuestions}`);
+        }
+
+        return quizData;
+
+    } catch (error) {
+        console.error('Quiz generation error (NoFile):', error);
+        
+        if (error instanceof SyntaxError) {
+            throw new Error(`Failed to parse quiz response: ${error.message}`);
+        }
+        
+        throw error;
+}
+}
+
 
 
 
 module.exports = {
     generateQuizFromDocument,
-    generateQuizFromDocumentTurbo
+    generateQuizFromDocumentTurbo,
+    generateQuizWithoutDocument
 };
