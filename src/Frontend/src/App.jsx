@@ -22,6 +22,10 @@ import MenuComponent from "./components/MenuComponent";
 import GlobalLeaderboard from "./components/LeaderbaordComponents/GlobalLeaderboard";
 import SpecificRank from "./components/LeaderbaordComponents/SpecificRank";
 import SpecificLeaderboard from "./components/LeaderbaordComponents/SpecificLeaderboard";
+import AiQuizLanding from "./components/QuizComponents/AiQuizLanding";
+import SlowMode from "./components/QuizComponents/SlowMode";
+import TurboMode from "./components/QuizComponents/TurboMode";
+import NoFile from "./components/QuizComponents/NoFile";
 
 
 
@@ -51,7 +55,10 @@ const App = () => {
                   
             <Route path="/dashboard/quiz/quizes" element={<Quizes />} />
             <Route path="/dashboard/quiz/live" element={<LiveQuizes />} />
-            <Route path="/dashboard/quiz/ai" element={<AiQuiz />} />
+            <Route path="/dashboard/quiz/ai" element={<AiQuizLanding />} />
+            <Route path="/dashboard/quiz/ai/slow" element={<SlowMode />} />
+            <Route path="/dashboard/quiz/ai/turbo" element={<TurboMode />} />
+            <Route path="/dashboard/quiz/ai/nofileUpload" element={<NoFile />} />
 
             <Route path="/dashboard/quiz/quizes/:_id" element={<SingleQuiz />} />
             
