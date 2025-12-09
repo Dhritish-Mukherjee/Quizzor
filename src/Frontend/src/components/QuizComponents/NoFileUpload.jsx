@@ -5,6 +5,7 @@ import api from "../../api/axios";
 import { toast } from "react-toastify";
 import Quiz from "./Quiz/Quiz";
 import { SiQuizlet } from "react-icons/si";
+import AiQuizComponent from "./Quiz/AiQuizComponent";
 
 const NoFileUpload = () => {
   const [formValues, setFormValues] = useState({
@@ -109,7 +110,7 @@ const NoFileUpload = () => {
       </h3>
 
       {aiQuizData ? (
-        <Quiz data={aiQuizData} />
+        <AiQuizComponent data={aiQuizData} />
       ) : (
         <div className="flex justify-center items-center ">
           <div className="quiz-form p-3 bg-zinc-800 rounded-lg flex flex-col gap-2">

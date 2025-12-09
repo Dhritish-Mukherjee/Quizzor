@@ -45,7 +45,7 @@ const Dashboard = () => {
             <div className="links flex flex-col gap-3 px-3">
               <Link to='/dashboard/profile' ><li onClick={() => setMenu("profile")} className={`list-none px-5 py-2  text-zinc-400 rounded-lg ${menu === 'profile' ? 'border-l-2 border-blue-500 bg-zinc-800' : ''} flex gap-3 items-center hover:bg-zinc-800`}><FaRegUserCircle /> Profile</li></Link>
 
-            <Link to='/dashboard/admin'><li onClick={() => setMenu("admin")} className={`list-none px-5 py-2  text-zinc-400 rounded-lg ${menu === 'admin' ? 'border-l-2 border-blue-500 bg-zinc-800' : ''} flex gap-3 items-center hover:bg-zinc-800`}><GrUserAdmin /> Admin</li></Link>
+            {/* <Link to='/dashboard/admin'><li onClick={() => setMenu("admin")} className={`list-none px-5 py-2  text-zinc-400 rounded-lg ${menu === 'admin' ? 'border-l-2 border-blue-500 bg-zinc-800' : ''} flex gap-3 items-center hover:bg-zinc-800`}><GrUserAdmin /> Admin</li></Link> */}
 
             <Link to='/dashboard/quiz'><li onClick={() => setMenu("quiz")} className={`list-none px-5 py-2  text-zinc-400 rounded-lg ${menu === 'quiz' ? 'border-l-2 border-blue-500 bg-zinc-800' : ''} flex gap-3 items-center hover:bg-zinc-800`}><MdQuiz /> Quiz</li></Link>
 

@@ -2,8 +2,10 @@ import React, { useRef, useState, useEffect } from "react";
 import "./Quiz.css";
 import api from "../../../api/axios.js";
 import { toast } from "react-toastify";
+import confetti from "canvas-confetti";
 
-const Quiz = ({ quiz_id , data }) => {
+
+const AiQuizComponent = ({ quiz_id , data }) => {
   // console.log(data);
 
   let [index, setIndex] = useState(0);
@@ -106,44 +108,25 @@ const Quiz = ({ quiz_id , data }) => {
     setResult(false);
   };
 
-  const submitQuiz = async () => {
-    const quizId = quiz_id || null;
-    console.log(quizId)
 
+  // submit quiz function 
+  const submitQuiz = () => {
+  const total = Array.isArray(data) ? data.length : 0;
+  toast.success(`You scored ${score}/${total}`);
 
-    const payload = {
-      _id: quizId,
-      answers: answers,
-      timeTaken: Math.floor(Math.random() * 5000),
-    };
-
-    try {
-      console.log(payload);
-      console.log("axios baseURL =", api?.defaults?.baseURL);
-
-      const res = await api.post(`/quiz/${quizId}/submit`, payload);
-      console.log("res : ", res)
-      console.log("res data : ", res.data);
-      
-
-      if (res) {
-        toast.success("Quiz submitted sucessfully");
-        console.log(res.data);
-      } else {
-        toast.error("Failed to submit quiz");
-        console.log(res.error);
-      }
-    } catch (error) {
-      console.log("Submission error : ", error);
-      toast.error("Failed to submit quiz");
-    }
-  };
+  confetti({
+    particleCount: 180,
+    spread: 90,
+    origin: { y: 0.6 },
+  });
+};
 
   return (
     <div className="container w-[300px] p-4 bg-zinc-800 flex flex-col gap-2 rounded-lg mx-auto ">
       <h1 className="text-xl">{data?.title || "Quiz"}</h1>
 
       <hr className="border-none h-[0.5px] bg-[#707070]" />
+
 
       {result ? (
         <></>
@@ -226,4 +209,4 @@ const Quiz = ({ quiz_id , data }) => {
   );
 };
 
-export default Quiz;
+export default AiQuizComponent;
