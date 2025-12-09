@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import Quiz from "./Quiz/Quiz";
 import { SiQuizlet } from "react-icons/si";
 
-const AiQuiz = () => {
+const SlowModeForm = () => {
 
   const [formValues , setFormValues] = useState({
     title : "",
@@ -90,7 +90,7 @@ arr.title = res.data.data.title || "Untitled Quiz";
 
 
         // request to backend 
-        const res = await api.post('/quiz/ai/upload/turbo', fm, {
+        const res = await api.post('/quiz/ai/upload/slow', fm, {
           headers : { "Content-Type" : "multipart/form-data" }
         });
 
@@ -149,7 +149,6 @@ arr.title = res.data.data.title || "Untitled Quiz";
 
         <form 
         onSubmit={submitHandler}
-
         className="py-2 flex flex-col gap-2  sm:w-[300px]">
           <div className="input  flex flex-col gap-1">
             <label htmlFor="title" className="text-lg">Give a title</label>
@@ -189,7 +188,7 @@ arr.title = res.data.data.title || "Untitled Quiz";
           </div>
 
           <div className="input flex flex-col gap-1">
-            <label htmlFor="file" className="text-lg flex items-center  gap-2">Upload (Required & No image file)<FiPaperclip size={15}/></label>
+            <label htmlFor="file" className="text-lg flex items-center  gap-2">Upload (Required & support image)<FiPaperclip size={15}/></label>
             <input type="file"
             onChange={handleFileChange}
             className="text-zinc-300 bg-zinc-700 w-[300px] rounded-lg px-3 py-1 flex gap-5 cursor-pointer  text-sm" required />
@@ -208,4 +207,4 @@ arr.title = res.data.data.title || "Untitled Quiz";
   );
 };
 
-export default AiQuiz;
+export default SlowModeForm;

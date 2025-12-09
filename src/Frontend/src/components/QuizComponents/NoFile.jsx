@@ -1,9 +1,10 @@
 import React from 'react'
+import NoFileUpload from './NoFileUpload'
 
 const NoFile = () => {
   return (
     <div>
-      No file upload 
+      <NoFileUpload />
     </div>
   )
 }

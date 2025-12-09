@@ -1,9 +1,10 @@
 import React from 'react'
+import SlowModeForm from './SlowModeForm'
 
 const SlowMode = () => {
   return (
     <div>
-      Slow mode 
+      <SlowModeForm />
     </div>
   )
 }
