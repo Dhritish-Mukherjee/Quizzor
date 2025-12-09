@@ -6,6 +6,7 @@ import api from "../../api/axios";
 import { toast } from "react-toastify";
 import Quiz from "./Quiz/Quiz";
 import { SiQuizlet } from "react-icons/si";
+import AiQuizComponent from "./Quiz/AiQuizComponent";
 
 const SlowModeForm = () => {
 
@@ -141,7 +142,7 @@ arr.title = res.data.data.title || "Untitled Quiz";
       </h3>
 
 
-      {aiQuizData ? (<Quiz  data={aiQuizData} />) : (
+      {aiQuizData ? (<AiQuizComponent  data={aiQuizData} />) : (
         <div className="flex justify-center items-center ">
         <div className="quiz-form p-3 bg-zinc-800 rounded-lg flex flex-col gap-2">
         <h3 className="text-lg text-center flex items-center justify-center gap-2"> <SiQuizlet size={15} /> Generate Quiz </h3>

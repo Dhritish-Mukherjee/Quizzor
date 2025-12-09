@@ -7,6 +7,7 @@ import { AppConetxt } from "../context/AppContext";
 import { motion } from "framer-motion";
 import api from "../api/axios.js";
 import { toast } from "react-toastify";
+import confetti from "canvas-confetti";
 
 const Login = () => {
   const [state, setState] = useState("Login");
@@ -29,6 +30,13 @@ const Login = () => {
           localStorage.setItem("token", data.token);
           setShowLogin(false);
           toast.success("Logged in sucessfully");
+
+          confetti({
+              particleCount: 180,
+              spread: 90,
+              origin: { y: 0.6 },
+            });
+
         } else {
           toast.error(data.message);
         }
@@ -45,6 +53,12 @@ const Login = () => {
           localStorage.setItem("token", data.token);
           setShowLogin(false);
           toast.success("Registered sucessfully");
+
+          confetti({
+              particleCount: 180,
+              spread: 90,
+              origin: { y: 0.6 },
+            });
         } else {
           console.log(data.message);
           toast.error(data.message);
