@@ -330,6 +330,208 @@
 
 ---
 
+## 6. Get AI Quiz (Turbo Mode)
+**Route:** `POST /api/quiz/ai/upload/turbo`
+
+**Description:** Generate AI-powered quizzes from uploaded documents (faster processing, supports PDFs, DOCX, PPTX, TXT, DOC, XLSX - **no image files**). The AI analyzes the document content and creates quiz questions based on the material.
+
+**Authentication:** Required (cookies/token)
+
+**Content-Type:** `multipart/form-data`
+
+**Request Body (Form Data):**
+- `file` (File, **required**) - The document file to generate quiz from (PDF, DOCX, PPTX, TXT, DOC, XLSX only - no images)
+- `numberOfQuestions` (String, **required**) - Number of questions to generate (e.g., "20")
+- `difficulty` (String, **required**) - Difficulty level: "easy", "medium", "hard", "god level hard"
+
+**Important Notes:**
+- This is a **POST** request, not GET (file uploads require POST)
+- Use `multipart/form-data` encoding (not JSON)
+- Turbo mode is faster than slow mode but **does not support image files**
+- Supported formats: PDF, DOCX, PPTX, TXT, DOC, XLSX
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "topic": "VHDL Concepts for Digital Design (Viva Questions)",
+    "numberOfQuestions": 20,
+    "difficulty": "god level hard",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Consider the following VHDL code snippet:\nvhdl\nsignal s_data : std_logic;\nvariable v_temp : std_logic;\nprocess (clk)\nbegin\n  if rising_edge(clk) then\n    v_temp := '0';\n    s_data <= v_temp;\n    v_temp := '1';\n  end if;\nend process;\n\nIf `s_data` is initially 'X' and `clk` transitions from '0' to '1', what will be the value of `s_data` after the delta delay following this rising edge?",
+        "options": {
+          "A": "'0'",
+          "B": "'1'",
+          "C": "'X' (unchanged)",
+          "D": "Undefined due to non-synthesizable construct."
+        },
+        "correctAnswer": "A",
+        "explanation": "Variables (`v_temp`) are updated immediately upon assignment within a process. Signals (`s_data`) are updated after a delta delay, meaning the signal assignment `s_data <= v_temp;` uses the value of `v_temp` at the moment of assignment (`'0'`). The subsequent assignment `v_temp := '1';` updates `v_temp` immediately, but this new value is not seen by the `s_data` assignment from the current clock cycle."
+      },
+      {
+        "id": 2,
+        "question": "Which VHDL modeling style offers the highest level of abstraction for initial design conceptualization and algorithmic description but typically provides the least direct control over the specific gate-level implementation during synthesis?",
+        "options": {
+          "A": "Structural modeling",
+          "B": "Dataflow modeling",
+          "C": "Behavioral modeling",
+          "D": "Mixed-signal modeling"
+        },
+        "correctAnswer": "C",
+        "explanation": "Behavioral modeling describes functionality using algorithms and sequential statements (e.g., `if/elsif`, `case`, loops) within processes. This is the highest level of abstraction, focusing on *what* the circuit does rather than *how* it's built at the gate level. While synthesizable, the exact gate implementation is left more to the synthesis tool's interpretation, offering less explicit control than dataflow (Boolean equations) or structural (component instantiation)."
+      }
+      // ... 18 more questions
+    ]
+  },
+  "fileInfo": {
+    "filename": "VHDL_Viva_Questions.pdf",
+    "size": 3701
+  }
+}
+```
+
+---
+
+## 7. Get AI Quiz (Slow Mode)
+**Route:** `POST /api/quiz/ai/upload/slow`
+
+**Description:** Generate AI-powered quizzes from uploaded documents (supports PDFs, images, and other document formats). The AI analyzes the document content and creates quiz questions based on the material.
+
+**Authentication:** Required (cookies/token)
+
+**Content-Type:** `multipart/form-data`
+
+**Request Body (Form Data):**
+- `file` (File, **required**) - The document file to generate quiz from (PDF, image, etc.)
+- `numberOfQuestions` (String, **required**) - Number of questions to generate (e.g., "20")
+- `difficulty` (String, **required**) - Difficulty level: "easy", "medium", "hard", "god level hard"
+
+**Important Notes:**
+- This is a **POST** request, not GET (file uploads require POST)
+- Use `multipart/form-data` encoding (not JSON)
+- This endpoint may take longer to respond due to AI processing
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "topic": "VHDL Concepts for Digital Design (Viva Questions)",
+    "numberOfQuestions": 20,
+    "difficulty": "god level hard",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Consider the following VHDL code snippet:\nvhdl\nsignal s_data : std_logic;\nvariable v_temp : std_logic;\nprocess (clk)\nbegin\n  if rising_edge(clk) then\n    v_temp := '0';\n    s_data <= v_temp;\n    v_temp := '1';\n  end if;\nend process;\n\nIf `s_data` is initially 'X' and `clk` transitions from '0' to '1', what will be the value of `s_data` after the delta delay following this rising edge?",
+        "options": {
+          "A": "'0'",
+          "B": "'1'",
+          "C": "'X' (unchanged)",
+          "D": "Undefined due to non-synthesizable construct."
+        },
+        "correctAnswer": "A",
+        "explanation": "Variables (`v_temp`) are updated immediately upon assignment within a process. Signals (`s_data`) are updated after a delta delay, meaning the signal assignment `s_data <= v_temp;` uses the value of `v_temp` at the moment of assignment (`'0'`). The subsequent assignment `v_temp := '1';` updates `v_temp` immediately, but this new value is not seen by the `s_data` assignment from the current clock cycle."
+      },
+      {
+        "id": 2,
+        "question": "Which VHDL modeling style offers the highest level of abstraction for initial design conceptualization and algorithmic description but typically provides the least direct control over the specific gate-level implementation during synthesis?",
+        "options": {
+          "A": "Structural modeling",
+          "B": "Dataflow modeling",
+          "C": "Behavioral modeling",
+          "D": "Mixed-signal modeling"
+        },
+        "correctAnswer": "C",
+        "explanation": "Behavioral modeling describes functionality using algorithms and sequential statements (e.g., `if/elsif`, `case`, loops) within processes. This is the highest level of abstraction, focusing on *what* the circuit does rather than *how* it's built at the gate level. While synthesizable, the exact gate implementation is left more to the synthesis tool's interpretation, offering less explicit control than dataflow (Boolean equations) or structural (component instantiation)."
+      }
+      // ... 18 more questions
+    ]
+  },
+  "fileInfo": {
+    "filename": "VHDL_Viva_Questions.pdf",
+    "size": 3701
+  }
+}
+```
+
+---
+
+## 8. Get AI Quiz (No File Upload)
+**Route:** `POST /api/quiz/ai/nofile`
+
+**Description:** Generate AI-powered quizzes based on a topic without uploading any files. The AI creates quiz questions from its knowledge base on the specified topic.
+
+**Authentication:** Required (cookies/token)
+
+**Content-Type:** `application/json`
+
+**Request Body:**
+```json
+{
+  "topic": "VHDL Concepts for Digital Design",
+  "description": "Focus on signal vs variable differences, process sensitivity, and synthesizable constructs",
+  "numberOfQuestions": 20,
+  "difficulty": "hard"
+}
+```
+
+**Request Body Parameters:**
+- `topic` (String, **required**) - The topic/subject for quiz generation (e.g., "JavaScript Arrays", "World War 2", "Photosynthesis")
+- `description` (String, optional) - Additional context or specific areas to focus on within the topic
+- `numberOfQuestions` (Number, **required**) - Number of questions to generate (e.g., 20)
+- `difficulty` (String, **required**) - Difficulty level: "easy", "medium", "hard", "god level hard"
+
+**Important Notes:**
+- This is a **POST** request with JSON body (not form-data)
+- No file upload required - AI generates questions from its knowledge base
+- Make sure to set `Content-Type: application/json` header
+- Use `description` field to provide more specific context for better question generation
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "topic": "VHDL Concepts for Digital Design",
+    "numberOfQuestions": 20,
+    "difficulty": "hard",
+    "questions": [
+      {
+        "id": 1,
+        "question": "What is the primary difference between a signal and a variable in VHDL?",
+        "options": {
+          "A": "Signals are updated immediately, variables after delta delay",
+          "B": "Variables are updated immediately, signals after delta delay",
+          "C": "Both are updated at the same time",
+          "D": "Variables cannot be used in processes"
+        },
+        "correctAnswer": "B",
+        "explanation": "In VHDL, variables are updated immediately when assigned within a process, while signals are scheduled to update after a delta delay. This is a fundamental distinction that affects how sequential logic is modeled."
+      },
+      {
+        "id": 2,
+        "question": "Which VHDL construct is used to model combinational logic most effectively?",
+        "options": {
+          "A": "Process with sensitivity list",
+          "B": "Concurrent signal assignment",
+          "C": "Sequential statements only",
+          "D": "Component instantiation"
+        },
+        "correctAnswer": "B",
+        "explanation": "Concurrent signal assignments are the most direct way to model combinational logic in VHDL as they execute continuously and update whenever their inputs change, similar to how combinational circuits behave."
+      }
+      // ... 18 more questions
+    ]
+  }
+}
+```
+
+---
+
+
 ## Flow Summary
 
 ### Taking a Quiz:
