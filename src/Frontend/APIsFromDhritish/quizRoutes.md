@@ -355,7 +355,7 @@
 {
   "success": true,
   "data": {
-    "topic": "VHDL Concepts for Digital Design (Viva Questions)",
+    "title": "VHDL Concepts for Digital Design (Viva Questions)",
     "numberOfQuestions": 20,
     "difficulty": "god level hard",
     "questions": [
@@ -419,7 +419,7 @@
 {
   "success": true,
   "data": {
-    "topic": "VHDL Concepts for Digital Design (Viva Questions)",
+    "title": "VHDL Concepts for Digital Design (Viva Questions)",
     "numberOfQuestions": 20,
     "difficulty": "god level hard",
     "questions": [
@@ -471,7 +471,7 @@
 **Request Body:**
 ```json
 {
-  "topic": "VHDL Concepts for Digital Design",
+  "title": "VHDL Concepts for Digital Design",
   "description": "Focus on signal vs variable differences, process sensitivity, and synthesizable constructs",
   "numberOfQuestions": 20,
   "difficulty": "hard"
@@ -479,7 +479,7 @@
 ```
 
 **Request Body Parameters:**
-- `topic` (String, **required**) - The topic/subject for quiz generation (e.g., "JavaScript Arrays", "World War 2", "Photosynthesis")
+- `title` (String, **required**) - The topic/subject for quiz generation (e.g., "JavaScript Arrays", "World War 2", "Photosynthesis")
 - `description` (String, optional) - Additional context or specific areas to focus on within the topic
 - `numberOfQuestions` (Number, **required**) - Number of questions to generate (e.g., 20)
 - `difficulty` (String, **required**) - Difficulty level: "easy", "medium", "hard", "god level hard"
@@ -495,7 +495,7 @@
 {
   "success": true,
   "data": {
-    "topic": "VHDL Concepts for Digital Design",
+    "title": "VHDL Concepts for Digital Design",
     "numberOfQuestions": 20,
     "difficulty": "hard",
     "questions": [

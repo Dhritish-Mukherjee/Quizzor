@@ -387,11 +387,18 @@ createQuizWithoutDocument = async (req, res) => {
         });
       }
 
-      const topic = req.body.topic || req.query.topic;
+      const title = req.body.title || req.query.title;
       const description = req.body.description || req.query.description;
       const difficulty = req.body.difficulty || req.query.difficulty;
 
-      const quizData = await generateQuizWithoutDocument(topic, description, difficulty, numberOfQuestions);
+      if(!title  || !difficulty){
+        return res.status(400).json({
+          success: false,
+          error: 'Please provide title and difficulty level.'
+        });
+      }
+
+      const quizData = await generateQuizWithoutDocument(title, description, difficulty, numberOfQuestions);
 
         return res.status(200).json({
             success: true,
