@@ -71,7 +71,7 @@ const generateQuizFromDocument = async (filePath,difficulty, numberOfQuestions) 
         Return ONLY a valid JSON object with this exact structure (no markdown, no code blocks, no additional text):
 
         {
-            "topic": "Brief description of the image content",
+            "title": "Brief description of the image content",
             "numberOfQuestions": ${numberOfQuestions},
             "difficulty": "${difficulty}",
             "questions": [
@@ -102,7 +102,7 @@ const generateQuizFromDocument = async (filePath,difficulty, numberOfQuestions) 
         Return ONLY a valid JSON object with this exact structure (no markdown, no code blocks, no additional text):
 
         {
-            "topic": "Brief description of the document topic",
+            "title": "Brief description of the document topic",
             "numberOfQuestions": ${numberOfQuestions},
             "difficulty": "${difficulty}",
             "questions": [
@@ -284,7 +284,7 @@ Requirements:
 Return ONLY a valid JSON object with this exact structure (no markdown, no code blocks, no additional text):
 
 {
-    "topic": "Brief description of the document topic",
+    "title": "Brief description of the document topic",
     "numberOfQuestions": ${numberOfQuestions},
     "difficulty": "${difficulty}",
     "questions": [
@@ -345,13 +345,13 @@ Return ONLY a valid JSON object with this exact structure (no markdown, no code 
     }
 };
 
-const generateQuizWithoutDocument = async (topic, description, difficulty, numberOfQuestions) => {
+const generateQuizWithoutDocument = async (title, description, difficulty, numberOfQuestions) => {
     const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
 
     try {
-        const prompt = `Based on the following topic and description, generate exactly ${numberOfQuestions} ${difficulty} quiz questions.
+        const prompt = `Based on the following title and description, generate exactly ${numberOfQuestions} ${difficulty} quiz questions.
 
-Topic: ${topic}
+Title: ${title}
 Description: ${description}
 
 Requirements:
@@ -365,7 +365,7 @@ Requirements:
 Return ONLY a valid JSON object with this exact structure (no markdown, no code blocks, no additional text):
 
 {
-    "topic": "Brief description of the ${topic}",
+    "title": "Brief description of the ${title}",
     "numberOfQuestions": ${numberOfQuestions},
     "difficulty": "${difficulty}",
     "questions": [
