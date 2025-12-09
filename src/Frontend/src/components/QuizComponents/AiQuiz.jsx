@@ -53,12 +53,13 @@ const AiQuiz = () => {
 
 
         // request to backend 
-        const res = await api.post('/dashboard/quiz/ai', fm, {
+        const res = await api.post('/quiz/ai/upload/turbo', fm, {
           headers : { "Content-Type" : "multipart/form-data" }
         });
 
         if(res) {
-          setAiQuizData(res.data);
+          console.log(res);
+          // setAiQuizData(res.data);
           toast.success("Quiz Generated sucessfully", {
             position: "top-right"
           })
@@ -92,7 +93,7 @@ const AiQuiz = () => {
     <div className="p-0 flex flex-col gap-3">
       <p
         className="flex items-center gap-2 px-4 cursor-pointer py-1 bg-zinc-800 w-fit rounded-full "
-        onClick={() => navigate("/dashboard/quiz")}
+        onClick={() => navigate("/dashboard/quiz/ai")}
       >
         <FaArrowLeft size={10} /> Back
       </p>
@@ -143,15 +144,16 @@ const AiQuiz = () => {
               <option value="easy" className="cursor-pointer">easy</option>
               <option value="medium" className="cursor-pointer">medium</option>
               <option value="hard" className="cursor-pointer">hard</option>
+              <option value="god level hard" className="cursor-pointer">god level hard</option>
             </select>
             
           </div>
 
           <div className="input flex flex-col gap-1">
-            <label htmlFor="file" className="text-lg flex items-center  gap-2">Upload file (optional)<FiPaperclip size={15}/></label>
+            <label htmlFor="file" className="text-lg flex items-center  gap-2">Upload (Required & No image file)<FiPaperclip size={15}/></label>
             <input type="file"
             onChange={handleFileChange}
-            className="text-zinc-300 bg-zinc-700 w-[300px] rounded-lg px-3 py-1 flex gap-5 cursor-pointer  text-sm" />
+            className="text-zinc-300 bg-zinc-700 w-[300px] rounded-lg px-3 py-1 flex gap-5 cursor-pointer  text-sm" required />
           </div>
 
           <button
