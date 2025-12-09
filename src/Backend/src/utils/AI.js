@@ -67,6 +67,8 @@ const generateQuizFromDocument = async (filePath,difficulty, numberOfQuestions) 
         - Ensure all options are plausible but only one is correct
         - Provide clear explanations referencing the image content
         - Test understanding of the visual information presented
+        - Options is an array and the correctAnswer is zero based indexing
+        - no two consecutive question should have same correctAnswer
 
         Return ONLY a valid JSON object with this exact structure (no markdown, no code blocks, no additional text):
 
@@ -78,13 +80,8 @@ const generateQuizFromDocument = async (filePath,difficulty, numberOfQuestions) 
                 {
                     "id": 1,
                     "question": "Question text here?",
-                    "options": {
-                        "A": "First option",
-                        "B": "Second option",
-                        "C": "Third option",
-                        "D": "Fourth option"
-                    },
-                    "correctAnswer": "A",
+                    "options": [First Option, Second Option, Third Option, Fourth Option],
+                    "correctAnswer": 2 (can be 0,1,2,3 depending on answer),
                     "explanation": "Explanation here"
                 }
             ]
@@ -98,7 +95,8 @@ const generateQuizFromDocument = async (filePath,difficulty, numberOfQuestions) 
         - Provide helpful and educational explanations
         - Cover different sections of the document if possible
         - Vary the difficulty level appropriately
-
+        - Options is an array and the correctAnswer is zero-based indexed
+        - no two consecutive question should have same correctAnswer
         Return ONLY a valid JSON object with this exact structure (no markdown, no code blocks, no additional text):
 
         {
@@ -109,13 +107,8 @@ const generateQuizFromDocument = async (filePath,difficulty, numberOfQuestions) 
                 {
                     "id": 1,
                     "question": "Question text here?",
-                    "options": {
-                        "A": "First option",
-                        "B": "Second option",
-                        "C": "Third option",
-                        "D": "Fourth option"
-                    },
-                    "correctAnswer": "A",
+                    "options": [First Option, Second Option, Third Option, Fourth Option],
+                    "correctAnswer": 1 (can be 0,1,2,3 depending on answer),
                     "explanation": "Explanation here"
                 }
             ]
@@ -280,6 +273,8 @@ Requirements:
 - Provide helpful and educational explanations
 - Cover different sections of the document if possible
 - Vary the difficulty level appropriately
+- Options is an array and correctAnswer is zero-based indexed
+- no two consecutive question should have same correctAnswer
 
 Return ONLY a valid JSON object with this exact structure (no markdown, no code blocks, no additional text):
 
@@ -291,13 +286,8 @@ Return ONLY a valid JSON object with this exact structure (no markdown, no code 
         {
             "id": 1,
             "question": "Question text here?",
-            "options": {
-                "A": "First option",
-                "B": "Second option",
-                "C": "Third option",
-                "D": "Fourth option"
-            },
-            "correctAnswer": "A",
+            "options": [First option, Second option, Third option, Fourth option],
+            "correctAnswer": 1 (can be 0,1,2,3 depending on answer),
             "explanation": "Explanation here"
         }
     ]
@@ -361,6 +351,7 @@ Requirements:
 - Provide helpful and educational explanations
 - Cover different sections of the document if possible
 - Vary the difficulty level appropriately
+- Options is an array and correctAnswer is zero-based indexed (can be 0,1,2,3 depending on answer)
 
 Return ONLY a valid JSON object with this exact structure (no markdown, no code blocks, no additional text):
 
@@ -372,13 +363,8 @@ Return ONLY a valid JSON object with this exact structure (no markdown, no code 
         {
             "id": 1,
             "question": "Question text here?",
-            "options": {
-                "A": "First option",
-                "B": "Second option",
-                "C": "Third option",
-                "D": "Fourth option"
-            },
-            "correctAnswer": "A",
+            "options": [First option, Second option, Third option, Fourth option],
+            "correctAnswer": 1 (can be 0,1,2,3 depending on answer),
             "explanation": "Explanation here"
         }
     ]
