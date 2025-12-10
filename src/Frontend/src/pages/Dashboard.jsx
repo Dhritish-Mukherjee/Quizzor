@@ -56,9 +56,9 @@ const Dashboard = () => {
             </div>
         </div>
 
-        <div className="main-content w-full px-3 py-5 sm:p-5  m-2 rounded-lg relative z-2">
+        <div className="main-content w-full h-auto min-h-screen px-3 py-5 sm:p-5  m-2 rounded-lg relative z-2">
           <Outlet /> 
-          <h3 className="absolute top-1/2 left-1/2 transform -translate-x-[50%]  -translate-y-[50%] -z-1 text-[5vw] tracking-wider text-zinc-800">Quizzor.</h3>   
+          <h3 className="absolute top-1/2 left-1/2 transform -translate-x-[50%]  -translate-y-[50%] -z-1 text-[8vw] sm:text-[5vw] tracking-wider text-zinc-800 ">Quizzor.</h3>   
         </div>
       </div>
 

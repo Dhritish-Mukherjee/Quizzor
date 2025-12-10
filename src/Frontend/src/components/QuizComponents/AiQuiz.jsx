@@ -52,7 +52,7 @@ const AiQuiz = () => {
 
     
 
-    const arr = res.data.data.questions.map((q) => {
+  const arr = res.data.data.questions.map((q) => {
   const ans = getAnswerFromCorrectAnswer(q);
 
   return {

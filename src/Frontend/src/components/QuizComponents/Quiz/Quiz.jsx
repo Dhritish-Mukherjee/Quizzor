@@ -2,8 +2,9 @@ import React, { useRef, useState, useEffect } from "react";
 import "./Quiz.css";
 import api from "../../../api/axios.js";
 import { toast } from "react-toastify";
+import confetti from "canvas-confetti";
 
-const Quiz = ({ quiz_id , data }) => {
+const Quiz = ({ quiz_id, data }) => {
   // console.log(data);
 
   let [index, setIndex] = useState(0);
@@ -13,6 +14,10 @@ const Quiz = ({ quiz_id , data }) => {
   let [result, setResult] = useState(false);
 
   const [answers, setAnswers] = useState([]);
+  const [submitQuizTracker, setSubmitQuizTracker] = useState(false);
+  const [showResult, setShowResult] = useState({});
+  const [yourRank, setYourRank] = useState({});
+  const [showRank, setShowRank] = useState(false);
 
   let option1 = useRef(null);
   let option2 = useRef(null);
@@ -20,7 +25,6 @@ const Quiz = ({ quiz_id , data }) => {
   let option4 = useRef(null);
 
   let option_array = [option1, option2, option3, option4];
-
 
   useEffect(() => {
     if (Array.isArray(data) && data.length > 0) {
@@ -104,12 +108,14 @@ const Quiz = ({ quiz_id , data }) => {
     setScore(0);
     setLock(false);
     setResult(false);
+    setSubmitQuizTracker(false);
+    // setShowResult()
+    setShowRank(false);
   };
 
   const submitQuiz = async () => {
     const quizId = quiz_id || null;
-    console.log(quizId)
-
+    console.log(quizId);
 
     const payload = {
       _id: quizId,
@@ -122,13 +128,20 @@ const Quiz = ({ quiz_id , data }) => {
       console.log("axios baseURL =", api?.defaults?.baseURL);
 
       const res = await api.post(`/quiz/${quizId}/submit`, payload);
-      console.log("res : ", res)
-      console.log("res data : ", res.data);
-      
+      // console.log("res : ", res)
+      // console.log("res data : ", res.data);
+      setSubmitQuizTracker(true);
 
       if (res) {
         toast.success("Quiz submitted sucessfully");
-        console.log(res.data);
+        confetti({
+          particleCount: 180,
+          spread: 90,
+          origin: { y: 0.6 },
+        });
+
+        console.log("res data's data : ", res.data.data);
+        setShowResult(res.data.data);
       } else {
         toast.error("Failed to submit quiz");
         console.log(res.error);
@@ -138,6 +151,29 @@ const Quiz = ({ quiz_id , data }) => {
       toast.error("Failed to submit quiz");
     }
   };
+  
+
+  const seeYourRankHandler = async () => {
+    const quizId = quiz_id || null;
+
+    try {
+     const res = await api.get(`/leaderboard/myrank/quiz/${quizId}`)
+    //  console.log("response : ", res);
+
+     setYourRank(res.data.data)
+     setShowRank(true);
+
+     confetti({
+          particleCount: 180,
+          spread: 90,
+          origin: { y: 0.6 },
+        });
+
+    } catch (error) {
+      console.log("catch Error : ",error);
+      toast.error("Can not get rank,try later!")
+    }
+  }
 
   return (
     <div className="container w-[300px] p-4 bg-zinc-800 flex flex-col gap-2 rounded-lg mx-auto ">
@@ -203,7 +239,7 @@ const Quiz = ({ quiz_id , data }) => {
       {result ? (
         <>
           <h2>
-            You corrected {score} of {data.length} questions 
+            You corrected {score} of {data.length} questions
           </h2>
           <button
             onClick={reset}
@@ -212,12 +248,38 @@ const Quiz = ({ quiz_id , data }) => {
             Reset
           </button>
 
-          <button
-            onClick={submitQuiz}
-            className="px-8 py-2 bg-zinc-700 rounded-lg cursor-pointer font-semibold text-md hover:scale-102 transition-all duration-300 hover:bg-zinc-600"
-          >
-            Submit quiz
-          </button>
+          {submitQuizTracker === false && (
+            <button
+              onClick={submitQuiz}
+              className="px-8 py-2 bg-zinc-700 rounded-lg cursor-pointer font-semibold text-md hover:scale-102 transition-all duration-300 hover:bg-zinc-600"
+            >
+              Submit quiz
+            </button>
+          )}
+
+          {submitQuizTracker && showResult &&  (
+            <div className="flex flex-col gap-2 bg-blue-500/10 p-3 border border-blue-500 rounded-lg ">
+              <p>
+                Correct ansers : {showResult.correctAnswers}/
+                {showResult.totalQuestions}
+              </p>
+
+              <p>Score : {showResult.score} </p>
+              <p>Accuracy : {showResult.accuracy}%</p>
+              {showRank === false && <button onClick={seeYourRankHandler} className="px-8 py-2 bg-yellow-600 rounded-lg cursor-pointer font-semibold text-md hover:scale-102 transition-all duration-300 hover:bg-yellow-500" >See rank in this Quiz</button> }
+
+              {showRank &&
+               <div className="flex flex-col gap-2 ">
+                <p>
+                  ✨Your rank : {yourRank.rank} ✨
+              </p>
+              <p className="text-yellow-500 ">Excellent try, next time more💪</p>
+               </div>
+               }
+              
+            </div>
+            
+          )}
         </>
       ) : (
         <></>

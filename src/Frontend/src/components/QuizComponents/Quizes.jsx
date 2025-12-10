@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { FaArrowLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import QuizCard from "./QuizCard.jsx";
+import { FaSearch } from "react-icons/fa";
 
 const Quizes = () => {
 
@@ -147,13 +148,14 @@ const Quizes = () => {
 
       {/* Filter section  */}
       <div className="filter-section flex flex-col gap-3 sm:flex sm:flex-row sm:justify-between items-center w-full">
-        <div className="input p-2 w-[300px]">
+        <div className="input px-3 py-1 w-[300px] flex justify-center items-center gap-1 bg-zinc-800 rounded-full  ">
+            <FaSearch  size={20}/>
 
             <input onChange={(e) => { 
               setSearch(e.target.value); 
               handleDifficulty(selectedDifficulty);
               }}
-              value={search} className="px-3 py-2 outline-0 bg-zinc-800 rounded-full w-full text-sm   placeholder:text-sm " type="text" placeholder="Search on the topic you want . . . " />
+              value={search} className="px-3 py-1 outline-0  rounded-full w-full text-sm   placeholder:text-sm " type="text" placeholder="Search on the topic you want . . . " />
 
         </div>
 
@@ -161,9 +163,9 @@ const Quizes = () => {
 
           <select  onChange={(e) => handleDifficulty(e.target.value)} className="bg-zinc-800 p-2 rounded-lg text-sm " name="difficulty" id="" required>
             <option   value="">difficulty</option>
-            <option  value="easy">easy</option>
-            <option value="medium">medium</option>
-            <option value="hard">hard</option>
+            <option  value="easy" className="text-green-500">easy</option>
+            <option value="medium" className="text-yellow-500">medium</option>
+            <option value="hard" className="text-red-500">hard</option>
           </select>
 
 
@@ -189,7 +191,7 @@ const Quizes = () => {
 
 
       {loading ? <div>Loading...</div> : 
-      <div className="quizes-display flex flex-col items-center sm:flex sm:flex-row sm:items-start sm:flex-wrap gap-3 py-3 ">
+      <div className="quizes-display flex flex-col items-center sm:flex sm:flex-row sm:items-start sm:flex-wrap gap-3 py-5 ">
         {quizes.length === 0 ? <p className="text-zinc-500">No quiz found!</p> : (
           quizes.map((item, index) => (
             <QuizCard  key={item._id  || item._quizid || index} item={item}  />
