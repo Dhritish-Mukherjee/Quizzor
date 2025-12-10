@@ -65,7 +65,7 @@ arr.title = res.data.data.title || "Untitled Quiz";
 
         setSingleQuiz(finalArrayData); // it is an array
 
-        toast.success("Quize loaded successfully", {
+        toast.success("Quiz loaded successfully", {
           position: "top-right",
         });
       } catch (error) {

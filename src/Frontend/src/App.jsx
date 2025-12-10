@@ -26,6 +26,7 @@ import AiQuizLanding from "./components/QuizComponents/AiQuizLanding";
 import SlowMode from "./components/QuizComponents/SlowMode";
 import TurboMode from "./components/QuizComponents/TurboMode";
 import NoFile from "./components/QuizComponents/NoFile";
+import CustomCursor from "./components/Cursor/CustomCursor";
 
 
 
@@ -34,6 +35,7 @@ const App = () => {
   const { showLogin, showMenu, setShowMenu } = useContext(AppConetxt);
   return (
     <div className="w-full min-h-screen  bg-zinc-900 text-white  ">
+      <CustomCursor />
      <ToastContainer 
       position="top-right"
       autoClose={3000}

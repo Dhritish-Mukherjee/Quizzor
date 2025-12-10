@@ -12,32 +12,32 @@ const LiveQuizes = () => {
 
   const [liveQuizes, setLiveQuizes] = useState([]);
 
-  useEffect(() => {
-    const fetchLiveQuizes = async () => {
-        setLoading(true);
-        try {
-          const res = await api.get("/quiz/live"); // live quizes api endpoint 
-          console.log(res);
+  // useEffect(() => {
+  //   const fetchLiveQuizes = async () => {
+  //       setLoading(true);
+  //       try {
+  //         const res = await api.get("/quiz/live"); // live quizes api endpoint 
+  //         console.log(res);
 
-          const dataArray = res.data ?.data || [];
-          setLiveQuizes(dataArray);
-          toast.success("Quizes loaded successfully", {
-            position: 'top-right'
-          });
-        } catch (error) {
-          console.log(error.message);
-          toast.error("Something went wrong, try later", {
-            position:"top-right"
-          })
-        }finally {
-          setLoading(false);
-        }
+  //         const dataArray = res.data ?.data || [];
+  //         setLiveQuizes(dataArray);
+  //         toast.success("Quizes loaded successfully", {
+  //           position: 'top-right'
+  //         });
+  //       } catch (error) {
+  //         console.log(error.message);
+  //         toast.error("Something went wrong, try later", {
+  //           position:"top-right"
+  //         })
+  //       }finally {
+  //         setLoading(false);
+  //       }
 
-    }
+  //   }
 
-    fetchLiveQuizes();
+  //   fetchLiveQuizes();
 
-  }, [])
+  // }, [])
 
 
   return (
@@ -53,8 +53,8 @@ const LiveQuizes = () => {
       </h3>
 
       {loading ? <div>Loading...</div> : 
-      <div className="quizes-display flex gap-3 py-3 ">
-        {liveQuizes.length === 0 ? <p className="text-zinc-500">No quiz is live now!</p> : (
+      <div className="quizes-display flex justify-center  gap-3 py-3 ">
+        {liveQuizes.length === 0 ? <p className="text-zinc-500 text-center ">No quiz is live now!</p> : (
           liveQuizes.map((item, index) => (
             <QuizCard  key={item._id  || item._quizid || index} item={item}  />
 

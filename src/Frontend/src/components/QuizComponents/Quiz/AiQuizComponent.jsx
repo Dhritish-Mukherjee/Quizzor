@@ -15,6 +15,7 @@ const AiQuizComponent = ({ quiz_id , data }) => {
   let [result, setResult] = useState(false);
 
   const [answers, setAnswers] = useState([]);
+  const [submitQuizTracker, setSubmitQuizTracker] = useState(false);
 
   let option1 = useRef(null);
   let option2 = useRef(null);
@@ -106,6 +107,7 @@ const AiQuizComponent = ({ quiz_id , data }) => {
     setScore(0);
     setLock(false);
     setResult(false);
+    setSubmitQuizTracker(false);
   };
 
 
@@ -113,6 +115,7 @@ const AiQuizComponent = ({ quiz_id , data }) => {
   const submitQuiz = () => {
   const total = Array.isArray(data) ? data.length : 0;
   toast.success(`You scored ${score}/${total}`);
+  setSubmitQuizTracker(true);
 
   confetti({
     particleCount: 180,
@@ -195,12 +198,15 @@ const AiQuizComponent = ({ quiz_id , data }) => {
             Reset
           </button>
 
+          {submitQuizTracker === false && 
           <button
             onClick={submitQuiz}
             className="px-8 py-2 bg-zinc-700 rounded-lg cursor-pointer font-semibold text-md hover:scale-102 transition-all duration-300 hover:bg-zinc-600"
           >
             Submit quiz
           </button>
+          }
+          
         </>
       ) : (
         <></>
