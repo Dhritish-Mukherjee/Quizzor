@@ -155,7 +155,7 @@ const Quizes = () => {
               setSearch(e.target.value); 
               handleDifficulty(selectedDifficulty);
               }}
-              value={search} className="px-3 py-1 outline-0  rounded-full w-full text-sm   placeholder:text-sm " type="text" placeholder="Search on the topic you want . . . " />
+              value={search} className="px-3 py-1 outline-0  rounded-full w-full text-sm   placeholder:text-sm " type="text" placeholder="Search on the topic u want... " />
 
         </div>
 

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, Outlet, Route, Routes } from "react-router-dom";
+import { Link, Outlet, Route, Routes, useLocation } from "react-router-dom";
 import { FaRegUserCircle } from "react-icons/fa";
 import { GrUserAdmin } from "react-icons/gr";
 import { MdQuiz } from "react-icons/md";
@@ -9,11 +9,46 @@ import { FaUserLarge } from "react-icons/fa6";
 import { AiOutlineLogout } from "react-icons/ai";
 import { AppConetxt } from "../context/AppContext";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
+import { ImProfile } from "react-icons/im";
+import { MdManageHistory } from "react-icons/md";
+import { SiGoogleadsense } from "react-icons/si";
+import { GiArtificialIntelligence } from "react-icons/gi";
 
 const Dashboard = () => {
 
   const [menu, setMenu] = useState("");
   const { logout, showMenu, setShowMenu, dashMenuHandler } = useContext(AppConetxt);
+
+  const location = useLocation();
+
+
+  const featureCards = [
+    {
+      title : "Your Profile",
+      desc : "Manage your personal details, avatar, and account information in one place.",
+      logo: <ImProfile className="text-blue-500" size={25} />
+    },
+    {
+      title : "Take a Quiz",
+      desc : "Start quizzes instantly and test your knowledge across different topics.",
+      logo: <MdQuiz className="text-blue-500" size={25} />
+    },
+    {
+      title : "Your Analytics",
+      desc : "View detailed performance reports, accuracy trends, and progress insights.",
+      logo: <MdManageHistory className="text-blue-500" size={25} />
+    },
+     {
+      title : "Leaderboard",
+      desc : "See top performers, compare your scores, and track your rank in real time.",
+      logo: <SiGoogleadsense className="text-blue-500" size={25} />
+    },
+    {
+      title : "AI-Generated Quiz",
+      desc : "Get quizzes created instantly by AI based on your chosen topic or difficulty(Different Modes available).",
+      logo: <GiArtificialIntelligence className="text-blue-500" size={25} />
+    }
+  ]
 
 
   return (
@@ -41,7 +76,7 @@ const Dashboard = () => {
 
       <div className="lower-part flex gap-5 ">
         <div className="sidebar w-1/5 min-h-screen h-auto bg-transparent border-r border-gray-600 hidden sm:flex flex-col gap-3">
-            <h3 className="text-xl text-center text-blue-500 border-b border-zinc-500 py-3">Dashboard</h3>
+            <h3 className="text-xl text-center text-blue-500 border-b border-zinc-500 py-3 font-semibold">Dashboard</h3>
             <div className="links flex flex-col gap-3 px-3">
               <Link to='/dashboard/profile' ><li onClick={() => setMenu("profile")} className={`list-none px-5 py-2  text-zinc-400 rounded-lg ${menu === 'profile' ? 'border-l-2 border-blue-500 bg-zinc-800' : ''} flex gap-3 items-center hover:bg-zinc-800`}><FaRegUserCircle /> Profile</li></Link>
 
@@ -58,6 +93,23 @@ const Dashboard = () => {
 
         <div className="main-content w-full h-auto min-h-screen px-3 py-5 sm:p-5  m-2 rounded-lg relative z-2">
           <Outlet /> 
+
+          {location.pathname === '/dashboard' || location.pathname === '/dashboard/' ? (
+            <div className="main-content flex flex-col gap-5  ">
+            <h2 className="text-blue-500 text-2xl text-center font-mono">"Welcome to Dashboard🎉"</h2>
+            <div className="cards flex flex-col gap-3 ">
+              {featureCards.map((item, index) => (
+                <div key={index} className="card p-5 border shadow-sm  flex flex-col gap-2 bg-white/5 rounded-lg hover:scale-102 cursor-pointer transition-all duration-300 ">
+                  <h3 className="flex justify-between items-center text-lg">"{item.title}" {item.logo}</h3>
+                  <p className="text-zinc-500">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+            <p className="sm:hidden text-zinc-300">Go to menu to explore👆</p>
+            
+          </div>
+          ) : <></>}
+
           <h3 className="absolute top-1/2 left-1/2 transform -translate-x-[50%]  -translate-y-[50%] -z-1 text-[8vw] sm:text-[5vw] tracking-wider text-zinc-800 ">Quizzor.</h3>   
         </div>
       </div>

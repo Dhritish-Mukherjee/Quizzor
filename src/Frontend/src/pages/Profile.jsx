@@ -8,8 +8,11 @@ const Profile = () => {
   const [userData, setUserData] = useState({});
   const ref = useRef(null);
 
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     const getUserDetails = async () => {
+      setLoading(true);
       try {
         const res = await api.get("/auth/me");
         // console.log("res --> " , res)
@@ -17,7 +20,7 @@ const Profile = () => {
         if (res) {
           // console.log(res.data.data)
           setUserData(res.data.data);
-          console.log(res.data.data);
+          // console.log(res.data.data);
           toast.info("Your Details loaded sucessfully");
         } else {
           console.log("errror ->", error.message);
@@ -26,6 +29,8 @@ const Profile = () => {
       } catch (error) {
         console.log("api error -> ", error.message);
         toast.error("Something went wrong, try later.");
+      }finally {
+        setLoading(false);
       }
     };
 
@@ -38,7 +43,9 @@ const Profile = () => {
         {" "}
         Your Profile🎉{" "}
       </h2>
-      <div className="details flex flex-col justify-center items-center  gap-5 py-5  ">
+
+      {loading ? <p>Loading...</p> : (
+        <div className="details flex flex-col justify-center items-center  gap-5 py-5  ">
         <div className="upper flex flex-col justify-center items-center gap-3  ">
           <FaUserCircle
             size={150}
@@ -78,7 +85,7 @@ const Profile = () => {
             dragTransition={{ bounceStiffness: 100, bounceDamping: 30 }}
             className=" flex flex-col gap-2 p-5 bg-blue-500/10 w-fit rounded-xl border border-blue-500 cursor-pointer  "
           >
-            <p className="text-blue-500 ">Total Quizes </p>
+            <p className="text-blue-500 ">Total Quizes ✨</p>
             <p className="text-center">{userData.totalQuizzes}</p>
           </motion.div>
 
@@ -90,7 +97,7 @@ const Profile = () => {
             dragTransition={{ bounceStiffness: 100, bounceDamping: 30 }}
             className=" flex flex-col gap-2 p-5 bg-blue-500/10 w-fit rounded-xl border border-blue-500 cursor-pointer  "
           >
-            <p className="text-blue-500 ">Total Score</p>
+            <p className="text-blue-500 ">Total Score 🎉</p>
             <p className="text-center">{userData.totalScore}</p>
           </motion.div>
 
@@ -102,7 +109,7 @@ const Profile = () => {
             dragTransition={{ bounceStiffness: 100, bounceDamping: 30 }}
             className=" flex flex-col gap-2 p-5 bg-blue-500/10 w-fit rounded-xl border border-blue-500 cursor-pointer  "
           >
-            <p className="text-blue-500 ">Average Accuracy</p>
+            <p className="text-blue-500 ">Average Accuracy 💪</p>
             <p className="text-center">
               {userData.averageAccuracy != null
                 ? userData.averageAccuracy.toFixed(2) + " %"
@@ -111,6 +118,7 @@ const Profile = () => {
           </motion.div>
         </div>
       </div>
+      )}
     </div>
   );
 };

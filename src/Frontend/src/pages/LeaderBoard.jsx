@@ -16,16 +16,16 @@ const LeaderBoard = () => {
         navigate : "/dashboard/leaderboard/global"
        },
        {
-         title : "Your Rank for a specific Quiz",
+         title : "See your global rank",
          logo:'💀',
-        desc : "See what your rank for a specific quiz",
-        navigate : "/dashboard/leaderboard/specific-rank"
+        desc : "See what your position globally among all quiz wizerds",
+        navigate : "/dashboard/leaderboard/myglobal-rank"
        },
        {
-         title : "Get Specific Quiz Leaderboard",
+         title : "See live leaderboard for live quizes",
          logo: '💹',
-        desc : "See the leaderboard for a specific quiz",
-        navigate : "/dashboard/leaderboard/specific-leaderbaord"
+        desc : "See the global leaderboard for live quizes",
+        navigate : "/dashboard/leaderboard/live-leaderboard"
        },
 
     ]
