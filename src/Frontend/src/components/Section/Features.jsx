@@ -36,7 +36,7 @@ const Features = () => {
             feature : 'Beautiful quiz UI'
         },
         {
-            feature : 'Instant share & download'
+            feature : 'Instant result & rank'
         },
         {
             feature : 'History of all quizzes'

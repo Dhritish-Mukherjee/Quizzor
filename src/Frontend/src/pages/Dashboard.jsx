@@ -41,7 +41,7 @@ const Dashboard = () => {
 
       <div className="lower-part flex gap-5 ">
         <div className="sidebar w-1/5 min-h-screen h-auto bg-transparent border-r border-gray-600 hidden sm:flex flex-col gap-3">
-            <h3 className="text-xl text-center text-blue-500 border-b border-zinc-500 py-3">Dashboard</h3>
+            <h3 className="text-xl text-center text-blue-500 border-b border-zinc-500 py-3 font-semibold">Dashboard</h3>
             <div className="links flex flex-col gap-3 px-3">
               <Link to='/dashboard/profile' ><li onClick={() => setMenu("profile")} className={`list-none px-5 py-2  text-zinc-400 rounded-lg ${menu === 'profile' ? 'border-l-2 border-blue-500 bg-zinc-800' : ''} flex gap-3 items-center hover:bg-zinc-800`}><FaRegUserCircle /> Profile</li></Link>
 

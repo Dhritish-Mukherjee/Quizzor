@@ -68,8 +68,8 @@ const App = () => {
 
             <Route path="/dashboard/leaderboard" element={<LeaderBoard />} />
             <Route path="/dashboard/leaderboard/global" element={<GlobalLeaderboard />} />
-            <Route path="/dashboard/leaderboard/specific-rank" element={<SpecificRank />} />
-            <Route path="/dashboard/leaderboard/specific-leaderbaord" element={<SpecificLeaderboard />} />
+            <Route path="/dashboard/leaderboard/myglobal-rank" element={<SpecificRank />} />
+            <Route path="/dashboard/leaderboard/live-leaderboard" element={<SpecificLeaderboard />} />
         </Route>
        
       </Routes>
