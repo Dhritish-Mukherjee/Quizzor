@@ -496,7 +496,7 @@ curl -X POST http://localhost:5000/api/quiz/QUIZ_ID/submit \
 |------|------|--------|
 | **Backend, Blockchain, AI** | Dhritish Mukherjee | [@Dhritish-Mukherjee](https://github.com/Dhritish-Mukherjee) |
 | **Frontend, Design, AI** | Pabitra Maity | [@CodeWithPabitra](https://github.com/Codewithpabitra) | |
-| **Design & Testing** | Rupam Saha | - |
+| **Design & Testing** | Rupam Saha | [@rupblgt2004](https://github.com/rupblgt2004) | |
 
 ---
 
@@ -516,4 +516,4 @@ If you found Quizzor.ai helpful, please consider:
 
 ---
 
-**Made with ❤️ by the Quizzor.ai Team**
+**Made with ❤️ by the Quizzor.ai Team** 
