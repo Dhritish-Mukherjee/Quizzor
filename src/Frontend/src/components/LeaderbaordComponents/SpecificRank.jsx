@@ -18,7 +18,7 @@ const SpecificRank = () => {
 
       if (res) {
         setUserRank(res.data.data);
-        // console.log(res.data.data);
+        console.log(res.data.data);
 
         confetti({
           particleCount: 180,

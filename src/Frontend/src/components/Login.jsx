@@ -37,10 +37,6 @@ const Login = () => {
               origin: { y: 0.6 },
             });
 
-          setTimeout(() => {
-            toast.success("Welcome to Dashboard🎉")
-          }, 1000);  
-
         } else {
           toast.error(data.message);
         }

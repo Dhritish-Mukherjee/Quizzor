@@ -86,7 +86,7 @@ const Features = () => {
         transition={{ delay: 0.5, duration: 3 }}
 
         className='p-1 bg-gray-600 flex justify-center items-center gap-2 rounded-full hover:scale-105 transition '>
-            <Link className='flex justify-center items-center gap-1 ' onClick={onClickHandler} to={user && navigate('/dashboard')}><button className='bg-gray-800 text-white px-5 py-1 sm:px-10 sm:py-2 rounded-full hover:text-neutral-300 cursor-pointer text-sm sm:text-lg '>Go to dashboard</button>
+            <Link  className='flex justify-center items-center gap-1 ' onClick={onClickHandler} to={user && navigate('/dashboard')}><button className='bg-gray-800 text-white px-5 py-1 sm:px-10 sm:py-2 rounded-full hover:text-neutral-300 cursor-pointer text-sm sm:text-lg '>Go to dashboard</button>
             <div className='flex justify-center items-center p-1 sm:p-2 bg-blue-500 rounded-full text-white '>
                 <FaArrowRight/>
             </div>
