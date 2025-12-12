@@ -7,6 +7,7 @@
 > AI-powered quiz platform with real-time competitions, intelligent quiz generation, and global leaderboards.
 
 **Live Demo**: [https://quizzor.onrender.com/](https://quizzor.onrender.com/)
+**Video Demo**: [https://youtu.be/j5Y4k0zSrzs?si=jluWYeMQay6_ac4N/](https://youtu.be/j5Y4k0zSrzs?si=jluWYeMQay6_ac4N/)
 
 ---
 
