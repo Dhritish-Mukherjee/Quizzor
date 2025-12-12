@@ -242,4 +242,4 @@ MIT License © 2025 – Quizzor.ai
 If you like Quizzor.ai, please consider giving it a ⭐ on GitHub!
 
 **Live Demo**: [\[Render Deployment\]  ](https://quizzor.onrender.com/)
-**Frontend Repo**: [\[GitHub Link\]](https://github.com/Dhritish-Mukherjee/Quizzor/tree/master/src/Backend/)
+**Backend Repo**: [\[GitHub Link\]](https://github.com/Dhritish-Mukherjee/Quizzor/tree/master/src/Backend/)
