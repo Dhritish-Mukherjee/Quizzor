@@ -146,7 +146,7 @@ cd Quizzor
 
 **2. Backend Setup**
 ```bash
-cd src/backend/src
+cd src/
 npm install
 ```
 
@@ -165,27 +165,27 @@ MAX_FILE_SIZE=10485760
 
 **3. Frontend Setup**
 ```bash
-cd ../../frontend
+cd frontend/
 npm install
 ```
 
 Create `.env` file:
 ```env
-VITE_API_URL=http://localhost:5000/api
+VITE_API_URL=http://localhost:5000
 ```
 
 ### Running Locally
 
 **Start Backend:**
 ```bash
-cd src/backend/src
+cd Quizzor/src/
 npm run dev
 ```
 Server runs on `http://localhost:5000`
 
 **Start Frontend:**
 ```bash
-cd src/frontend
+cd Quizzor/src/frontend
 npm run dev
 ```
 App runs on `http://localhost:5173`
@@ -196,8 +196,8 @@ App runs on `http://localhost:5173`
 
 ### Base URL
 ```
-Production: https://quizzor.onrender.com/api
-Development: http://localhost:5000/api
+Production: https://quizzor.onrender.com
+Development: http://localhost:5000
 ```
 
 ### Authentication
@@ -518,4 +518,4 @@ If you found Quizzor.ai helpful, please consider:
 
 ---
 
-**Made with ❤️ by the Quizzor.ai Team** 
+**Made with ❤️ by Time Limit Exceeded** 
