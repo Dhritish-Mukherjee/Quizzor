@@ -75,7 +75,7 @@ src/backend/src
 Clone the project:
 ```bash
 git clone https://github.com/Dhritish-Mukherjee/Quizzor.git
-cd src/backend/src
+cd src/
 ```
 
 Install dependencies:
@@ -91,33 +91,47 @@ npm run dev
 ---
 
 
-## 📡 API Endpoints Overview
+# API Endpoints Reference
 
-### Authentication
-- `POST /api/auth/register` – User signup
+## 🔐 Authentication
+- `POST /api/auth/signup` – User registration
 - `POST /api/auth/login` – User login
 - `POST /api/auth/logout` – Logout (Redis blocklist)
-- `GET /api/auth/me` – Get current user
+- `GET /api/auth/me` – Get current user details
+- `POST /api/auth/refresh` – Refresh authentication token
 
-### Quiz Generation
-- `POST /api/quiz/generate/turbo` – Fast text-based generation
-- `POST /api/quiz/generate/slow` – File upload with images
-- `POST /api/quiz/generate/nofile` – Topic-based generation
-- `GET /api/quiz/:id` – Get quiz details
+---
 
-### Quiz Submission
-- `POST /api/quiz/:id/submit` – Submit answers & calculate score
-- `GET /api/quiz/:id/results` – Get submission results
+## 🧪 Quiz Management
+- `GET /api/quiz/` – Get all quizzes (with filters)
+- `GET /api/quiz/:id` – Get single quiz details
+- `GET /api/quiz/history` – Get user's quiz submission history
 
-### Leaderboard
-- `GET /api/leaderboard/global` – Global rankings (Redis)
-- `GET /api/leaderboard/quiz/:id` – Quiz-specific rankings
-- `GET /api/leaderboard/user/:id` – User rank & stats
+---
 
-### Analytics
-- `GET /api/user/dashboard` – User stats & history
-- `GET /api/user/submissions` – All user submissions
-- `GET /api/analytics/insights` – Performance analytics
+## 🤖 AI Quiz Generation
+- `POST /api/quiz/ai/upload/turbo` – Fast generation (text files only)
+- `POST /api/quiz/ai/upload/slow` – Full generation (all file types including images)
+- `POST /api/quiz/ai/nofile` – Topic-based generation (no file upload)
+
+---
+
+## 📝 Quiz Submission & Results
+- `POST /api/quiz/:id/submit` – Submit quiz answers
+- `GET /api/quiz/submission/:id` – Get submission details
+
+---
+
+## 🏆 Leaderboard
+- `GET /api/leaderboard/global` – Global rankings (all users)
+- `GET /api/leaderboard/myrank/global` – Current user's global rank
+- `GET /api/leaderboard/myrank/quiz/:quizId` – Current user's rank for specific quiz
+- `GET /api/leaderboard/quiz/:quizId` – Quiz-specific leaderboard
+
+---
+
+## 🔧 Admin
+- `POST /api/admin/quiz` – Create quiz as admin
 
 ---
 
@@ -228,4 +242,4 @@ MIT License © 2025 – Quizzor.ai
 If you like Quizzor.ai, please consider giving it a ⭐ on GitHub!
 
 **Live Demo**: [\[Render Deployment\]  ](https://quizzor.onrender.com/)
-**Frontend Repo**: [\[GitHub Link\]](https://quizzor.onrender.com/)
+**Frontend Repo**: [\[GitHub Link\]](https://github.com/Dhritish-Mukherjee/Quizzor/tree/master/src/Backend/)
