@@ -15,6 +15,17 @@ const MenuComponent = () => {
 
   return (
     <AnimatePresence>
+        {/* {showMenu && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/50 z-40 sm:hidden"
+          onClick={() => setShowMenu(false)}
+        />
+      )} */}
+
+
         {showMenu && 
     <motion.div 
     initial={{ opacity:0, x:100 }}
@@ -22,7 +33,7 @@ const MenuComponent = () => {
     exit={{ opacity: 0, x: 100,transition: { duration: 0.5 } }}
     transition={{duration: 0.3,}}
 
-    className="links flex flex-col gap-3 px-3 absolute bg-zinc-900 w-[50%] p-5 right-0 top-[9.5%] min-h-screen h-auto sm:hidden z-100 border-l border-zinc-500 ">
+    className="links flex flex-col gap-3 px-3 absolute bg-zinc-900 w-[50%] p-5 right-0 top-[9.4%] min-h-screen h-auto sm:hidden z-100 border-l border-zinc-500">
               <Link to='/dashboard/profile' ><li onClick={() => setMenu("profile")} className={`list-none px-5 py-2  text-zinc-400 rounded-lg ${menu === 'profile' ? 'border-l-2 border-blue-500 bg-zinc-800' : ''} flex gap-3 items-center hover:bg-zinc-800`}><FaRegUserCircle /> Profile</li></Link>
 
             {/* <Link to='/dashboard/admin'><li onClick={() => setMenu("admin")} className={`list-none px-5 py-2  text-zinc-400 rounded-lg ${menu === 'admin' ? 'border-l-2 border-blue-500 bg-zinc-800' : ''} flex gap-3 items-center hover:bg-zinc-800`}><GrUserAdmin /> Admin</li></Link> */}

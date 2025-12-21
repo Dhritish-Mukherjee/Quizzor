@@ -3,6 +3,7 @@ import api from "../api/axios.js";
 import { toast } from "react-toastify";
 import { FaUserCircle } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { RxDragHandleDots2 } from "react-icons/rx";
 
 const Profile = () => {
   const [userData, setUserData] = useState({});
@@ -75,7 +76,9 @@ const Profile = () => {
           ref={ref}
           className="lower  p-5 justify-center  border w-full sm:w-[800px] border-zinc-700 rounded-xl flex flex-col gap-3 relative"
         >
-          <h3 className="text-blue-500 text-xl text-center ">Quiz Details</h3>
+          <div className="flex justify-center items-center ">
+            <h3 className="text-blue-500 text-xl text-center bg-black/50 w-fit  px-3 py-1 rounded-lg">Quiz Details</h3>
+          </div>
 
           <motion.div
             drag
@@ -85,7 +88,11 @@ const Profile = () => {
             dragTransition={{ bounceStiffness: 100, bounceDamping: 30 }}
             className=" flex flex-col gap-2 p-5 bg-blue-500/10 w-fit rounded-xl border border-blue-500 cursor-pointer  "
           >
-            <p className="text-blue-500 ">Total Quizes ✨</p>
+            <div className="flex justify-between items-center gap-3">
+              <div></div>
+              <p className="text-blue-500 ">Total Quizes ✨</p>
+              <RxDragHandleDots2 />
+            </div>
             <p className="text-center">{userData.totalQuizzes}</p>
           </motion.div>
 
@@ -97,7 +104,12 @@ const Profile = () => {
             dragTransition={{ bounceStiffness: 100, bounceDamping: 30 }}
             className=" flex flex-col gap-2 p-5 bg-blue-500/10 w-fit rounded-xl border border-blue-500 cursor-pointer  "
           >
-            <p className="text-blue-500 ">Total Score 🎉</p>
+            <div className="flex justify-between items-center gap-3">
+              <div></div>
+              <p className="text-blue-500 ">Total Score 🎉</p>
+              <RxDragHandleDots2 />
+            </div>
+            
             <p className="text-center">{userData.totalScore}</p>
           </motion.div>
 
@@ -109,7 +121,11 @@ const Profile = () => {
             dragTransition={{ bounceStiffness: 100, bounceDamping: 30 }}
             className=" flex flex-col gap-2 p-5 bg-blue-500/10 w-fit rounded-xl border border-blue-500 cursor-pointer  "
           >
-            <p className="text-blue-500 ">Average Accuracy 💪</p>
+            <div className="flex justify-between items-center gap-3" >
+              <div></div>
+              <p className="text-blue-500 ">Average Accuracy 💪</p>
+              <RxDragHandleDots2 />
+            </div>
             <p className="text-center">
               {userData.averageAccuracy != null
                 ? userData.averageAccuracy.toFixed(2) + " %"
