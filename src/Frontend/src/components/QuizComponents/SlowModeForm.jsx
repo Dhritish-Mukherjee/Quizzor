@@ -156,7 +156,7 @@ arr.title = res.data.data.title || "Untitled Quiz";
             <input className="px-3 py-1 outline-0 bg-zinc-700 rounded-lg focus:border focus:border-blue-500 placeholder:text-sm" name="title" 
             value={formValues.title}
             onChange={handleChange}
-            type="text" placeholder=" e.g. , Programming quiz " required />
+            type="text" placeholder=" e.g. , Programming quiz " />
           </div>
 
           <div className="input  flex flex-col gap-1">
@@ -164,7 +164,7 @@ arr.title = res.data.data.title || "Untitled Quiz";
             <input className="px-3 py-1 outline-0 bg-zinc-700 rounded-lg focus:border focus:border-blue-500" name="topic"
             value={formValues.topic}
             onChange={handleChange}
-             type="text" placeholder=" e.g. , linear algebra, programming " required />
+             type="text" placeholder=" e.g. , linear algebra, programming " />
           </div>
 
           <div className="input flex flex-col gap-1">

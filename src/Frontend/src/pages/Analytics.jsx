@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import api from "../api/axios.js";
 import { toast } from "react-toastify";
+import { RiArrowDropDownLine } from "react-icons/ri";
 
 const Analytics = () => {
   const [userAnalytics, setUserAnalytics] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const [showDetails, setShowDetails] = useState(false);
+
 
   useEffect(() => {
     const getAnalytics = async () => {
@@ -51,7 +55,7 @@ const Analytics = () => {
               <p className="text-center text-blue-500 text-lg px-3 py-1 bg-black/50 w-fit rounded-lg  ">Quiz Details</p>
               <p className="px-3 py-1 border border-blue-500 w-fit rounded-lg">Title - {item.quiz.title}</p>
               <p className="px-3 py-1 border border-blue-500 w-fit rounded-lg">Category - {item.quiz.category}</p>
-              <p className="px-3 py-1 border border-blue-500 w-fit rounded-lg">Difficulty - <span className={`px-3.5 py-0.5  border ${item.quiz.difficulty === 'easy' ? 'bg-green-500/10  border-green-500 text-green-500 ' : ''} ${item.quiz.difficulty === 'medium' ? 'bg-yellow-500/10  border-yellow-500 text-yellow-500' : ''} ${item.quiz.difficulty === 'hard' ? 'bg-red-500/10  border-red-500 text-red-500 ' : ''} rounded-lg `}>{item.quiz.difficulty}</span></p>
+              <p className="px-3 py-1 border border-blue-500 bg-black/50  w-fit rounded-lg">Difficulty - <span className={`px-3.5 py-0.5  border  ${item.quiz.difficulty === 'easy' ? 'bg-green-500/10  border-green-500 text-green-500 ' : ''} ${item.quiz.difficulty === 'medium' ? 'bg-yellow-500/10  border-yellow-500 text-yellow-500' : ''} ${item.quiz.difficulty === 'hard' ? 'bg-red-500/10  border-red-500 text-red-500 ' : ''} rounded-lg `}>{item.quiz.difficulty}</span></p>
             </div>
 
             <div className="submissionDetails border p-3 bg-blue-500/10 border-blue-500 rounded-lg flex flex-col gap-2 ">
@@ -59,15 +63,19 @@ const Analytics = () => {
               <p className="px-3 py-1 border border-blue-500 w-fit rounded-lg">Total Questions - {item.totalQuestions}</p>
               <p className="px-3 py-1 border border-blue-500 w-fit rounded-lg">You corrcted - {item.correctAnswers}</p>
               <p className="px-3 py-1 border border-blue-500 w-fit rounded-lg">Your Score - {item.score}</p>
-              <p className="px-3 py-1 border border-blue-500 w-fit rounded-lg">Accuracy- {item.accuracy}%</p>
+              <p className="px-3 py-1 border border-blue-500 w-fit rounded-lg">Accuracy- {item.accuracy.toFixed(2)}%</p>
               <p className="px-3 py-1 border border-blue-500 w-fit rounded-lg">
                 Completed at - {new Date(item.completedAt).toLocaleString()}
               </p>
             </div>
 
             <div className="answerDetails border p-3 bg-yellow-500/10 border-yellow-500 rounded-lg flex flex-col gap-3 ">
-              <p className="text-lg font-semibold text-center  ">✨See Your Questionwise Analysis✨</p>
-              {item.answers.map((question, index) => (
+              <div onClick={() => setShowDetails(!showDetails)} className="header-dropdown flex justify-between items-center  cursor-pointer">
+                <div></div>
+                <p className="text-lg font-semibold text-center  ">✨See Your Questionwise Analysis✨</p>
+                <RiArrowDropDownLine size={30} />
+              </div>
+              {showDetails && item.answers.map((question, index) => (
                 <div key={index} className="questionCard border p-3 sm:flex sm:justify-between rounded-lg  ">
                   <p>Question No - {index + 1}</p>
                   <p>you selected option - {question.selectedAnswer + 1}</p>
