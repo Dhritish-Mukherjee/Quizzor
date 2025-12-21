@@ -1,7 +1,7 @@
 {
   "type":"commonjs",
   "scripts": {
-    "dev": "nodemon ./Backend/src/index.js",
+    "dev": "npx nodemon ./Backend/src/index.js",
     "start": "node ./Backend/src/index.js",
     "build": "npm install && npm install --prefix ./Frontend && npm run build --prefix ./Frontend"
   },
