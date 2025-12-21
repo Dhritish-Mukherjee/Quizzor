@@ -10,8 +10,21 @@ const XLSX = require('xlsx');
 const MAX_TEXT_LENGTH = 80000;
 
 
+function pickRandomKey() {
+  const n = Math.floor(Math.random() * 3) + 1;
+  let key;
+
+  if (n === 1) key = process.env.GOOGLE_API_KEY;
+  if (n === 2) key = process.env.GOOGLE_API_KEY_TWO;
+  if (n === 3) key = process.env.GOOGLE_API_KEY_THREE;
+
+  console.log(key);
+  return key;
+}
+
+
 const generateQuizFromDocument = async (filePath,difficulty, numberOfQuestions) => {
-    const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
+    const genAI = new GoogleGenerativeAI(pickRandomKey());
     const fileManager = new GoogleAIFileManager(process.env.GOOGLE_API_KEY);
 
     const ext = path.extname(filePath).toLowerCase();
@@ -236,7 +249,7 @@ async function extractTextFromFile(filePath) {
 }
 
 const generateQuizFromDocumentTurbo = async (filePath, difficulty, numberOfQuestions) => {
-    const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
+    const genAI = new GoogleGenerativeAI(pickRandomKey());
 
     try {
 
@@ -336,7 +349,7 @@ Return ONLY a valid JSON object with this exact structure (no markdown, no code 
 };
 
 const generateQuizWithoutDocument = async (title, description, difficulty, numberOfQuestions) => {
-    const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
+    const genAI = new GoogleGenerativeAI(pickRandomKey());
 
     try {
         const prompt = `Based on the following title and description, generate exactly ${numberOfQuestions} ${difficulty} quiz questions.
